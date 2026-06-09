@@ -1,0 +1,37 @@
+import 'dart:ui';
+
+class AppColors {
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+  static const Color themeColor = Color(0xFF9D9FE6);
+  static const Color color242424 = Color(0xFF242424);
+  static const Color color787878 = Color(0xFF787878);
+  static const Color colorF6F6F6 = Color(0xFFF6F6F6);
+  static const Color colorF3F3F3 = Color(0xFFF3F3F3);
+  static const Color color4CAF50 = Color(0xFF4CAF50);
+  static const Color colorFAF9F6 = Color(0xFFFAF9F6);
+  static const Color color858585 = Color(0xFF858585);
+  static const Color colorF9F9F9 = Color(0xFFF9F9F9);
+  static const Color colorFF0000 = Color(0xFFFF0000);
+  static const Color color719B4D = Color(0xFF719B4D);
+  static const Color color0A3D62 = Color(0xFF0A3D62);
+  static const Color color444444 = Color(0xFF444444);
+  static const Color colorF2F2F6 = Color(0xFFF2F2F6);
+  static const Color colorE9E9EA = Color(0xFFE9E9EA);
+  static const Color color1F4B82 = Color(0xFF1F4B82);
+  static const Color colorF2F3F6 = Color(0xFFF2F3F6);
+  static const Color color141718 = Color(0xFF141718);
+  static const Color colorDCDCDC = Color(0xFFDCDCDC);
+  static const Color colorD4D4D4 = Color(0xFFD4D4D4);
+  static const Color color1A1B27 = Color(0xFF1A1B27);
+  static const Color colorBCBCBC = Color(0xffBCBCBC);
+  static const Color colorE7E7E7 = Color(0xffE7E7E7);
+  static const Color color808080 = Color(0xff808080);
+  static const Color colorB0C4DE = Color(0xffB0C4DE);
+  static const Color color999999 = Color(0xff999999);
+  static const Color color797979 = Color(0xff797979);
+  static const Color color262626 = Color(0xff262626);
+  static const Color colorFBFBFB = Color(0xffFBFBFB);
+  static const Color color0F1122 = Color(0xff0F1122);
+  static const Color color15172D = Color(0xff15172D);
+}
