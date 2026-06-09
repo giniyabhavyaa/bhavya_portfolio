@@ -163,7 +163,7 @@ class HeroWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _ActionIcon(
-              icon: FontAwesomeIcons.github,
+              icon: FontAwesomeIcons.github.data,
               tooltip: "GitHub",
               onTap: controller.openGithub,
             ),
@@ -181,7 +181,7 @@ class HeroWidget extends StatelessWidget {
             ),
             const Gap(16),
             _ActionIcon(
-              icon: FontAwesomeIcons.linkedin,
+              icon: FontAwesomeIcons.linkedin.data,
               tooltip: "LinkedIn",
               onTap: controller.openLinkedin,
             ),
@@ -310,7 +310,7 @@ class HeroWidget extends StatelessWidget {
                   runSpacing: 16,
                   children: [
                     _ActionIcon(
-                      icon: FontAwesomeIcons.github,
+                      icon: FontAwesomeIcons.github.data,
                       tooltip: "GitHub",
                       onTap: controller.openGithub,
                     ),
@@ -328,7 +328,7 @@ class HeroWidget extends StatelessWidget {
                     ),
                     const Gap(16),
                     _ActionIcon(
-                      icon: FontAwesomeIcons.linkedin,
+                      icon: FontAwesomeIcons.linkedin.data,
                       tooltip: "LinkedIn",
                       onTap: controller.openLinkedin,
                     ),
