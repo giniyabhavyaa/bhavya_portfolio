@@ -40,11 +40,6 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
 
 
-  @override
-  void dispose() {
-    floatController.dispose();
-    super.dispose();
-  }
 
   final moons = [
     MoonData(size: 90, speed: 0.08, index: 0),
@@ -208,6 +203,12 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
     },
   ];
 
+  @override
+  void dispose() {
+    scrollController.dispose();
+    floatController.dispose();
+    super.dispose();
+  }
 
 }
 
