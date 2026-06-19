@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class HeroWidget extends StatelessWidget {
   const HeroWidget({
@@ -80,6 +81,7 @@ class HeroWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   Assets.png.icImage.path,
+                  filterQuality: FilterQuality.low,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -369,65 +371,77 @@ class HeroWidget extends StatelessWidget {
             final height = constraints.maxHeight;
             return MouseRegion(
               onHover: (event) {
-                controller.updateTilt(Offset(
-                  event.localPosition.dx / width * 300,
-                  event.localPosition.dy / height * 300,
-                ));
+                controller.updateTilt(
+                  Offset(
+                    event.localPosition.dx / width * 300,
+                    event.localPosition.dy / height * 300,
+                  ),
+                );
               },
               onExit: controller.resetTilt,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                transform: Matrix4.identity()
-                  ..rotateX(controller.tiltX)
-                  ..rotateY(controller.tiltY),
-                alignment: Alignment.center,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 280,
-                      height: 280,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: RadialGradient(
-                          colors: [
-                            AppColors.themeColor.withValues(alpha: 0.45),
-                            AppColors.themeColor.withValues(alpha: 0.15),
-                            Colors.transparent,
+              child: GetBuilder<HomeController>(
+                id: 'heroTilt',
+                builder: (controller) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    transform: Matrix4.identity()
+                      ..rotateX(controller.tiltX)
+                      ..rotateY(controller.tiltY),
+                    alignment: Alignment.center,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              width: 280,
+                              height: 280,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
+                                  colors: [
+                                    AppColors.themeColor.withValues(alpha: 0.45),
+                                    AppColors.themeColor.withValues(alpha: 0.15),
+                                    Colors.transparent,
+                                  ],
+                                  stops: const [0.4, 0.7, 1],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 400,
+                              height: 400,
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(28),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.themeColor.withValues(alpha: 0.6),
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(22),
+                                child: Image.asset(
+                                  Assets.png.icImage.path,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                           ],
-                          stops: const [0.4, 0.7, 1],
-                        ),
-                      ),
+                        )
+                            .animate()
+                            .fadeIn(duration: 600.ms)
+                            .scale(duration: 700.ms)
+                            .moveY(begin: 8, end: -8, duration: 4.seconds)
+                            .then()
+                            .moveY(begin: -8, end: 8, duration: 4.seconds),
+                      ],
                     ),
-                    Container(
-                      width: 400,
-                      height: 400,
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(28),
-                        gradient: LinearGradient(
-                          colors: [
-                            AppColors.themeColor.withValues(alpha: 0.6),
-                            Colors.transparent,
-                          ],
-                        ),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(22),
-                        child: Image.asset(
-                          Assets.png.icImage.path,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-                    .animate()
-                    .fadeIn(duration: 600.ms)
-                    .scale(duration: 700.ms)
-                    .moveY(begin: 8, end: -8, duration: 4.seconds)
-                    .then()
-                    .moveY(begin: -8, end: 8, duration: 4.seconds),
+                  );
+                },
               ),
             );
           },

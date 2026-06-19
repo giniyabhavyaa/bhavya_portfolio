@@ -66,6 +66,7 @@ class HomeScreen extends StatelessWidget {
               Positioned.fill(
                 child: Image.asset(
                   Assets.png.icBackgroundImage2Png.path,
+                  filterQuality: FilterQuality.none,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -146,8 +147,6 @@ class HomeScreen extends StatelessWidget {
                 index: 0,
                 child: RepaintBoundary(
                   child: HeroWidget( controller: controller)
-                      .animate(onPlay: (c) => c.repeat(reverse: true))
-                      .moveY(begin: -10, end: 10, duration: GetNumUtils(4).seconds),
                 ),
               ),
 

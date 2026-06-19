@@ -72,13 +72,12 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   void updateTilt(Offset position) {
     tiltY = (position.dx - 150) / 600;
     tiltX = -(position.dy - 150) / 600;
-    update();
+
   }
 
   void resetTilt(value) {
     tiltX = 0;
     tiltY = 0;
-    update();
   }
 
 
