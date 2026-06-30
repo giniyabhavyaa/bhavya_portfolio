@@ -1,1 +1,0 @@
-enum ScreenType { mobile, laptop, desktop }

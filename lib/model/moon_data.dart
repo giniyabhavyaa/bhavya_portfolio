@@ -3,7 +3,7 @@ class MoonData {
   final double speed;
   final int index;
 
-  MoonData({
+  const MoonData({
     required this.size,
     required this.speed,
     required this.index,

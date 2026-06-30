@@ -8,35 +8,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get.dart';
 
 class HeroWidget extends StatelessWidget {
   const HeroWidget({
     super.key,
-    required this.controller,
   });
 
-  final HomeController controller;
+  HomeController get controller => Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        vertical: context.isDesktop
+        vertical: context.isDesktopScreen
             ? 140
-            : context.isTablet
+            : context.isTabletScreen
             ? 100
             : 70,
-        horizontal: context.isDesktop
+        horizontal: context.isDesktopScreen
             ? 80
-            : context.isTablet
+            : context.isTabletScreen
             ? 48
             : 20,
       ),
-      child: context.isDesktop
+      child: context.isDesktopScreen
           ? _desktopHero()
-          : context.isTablet
+          : context.isTabletScreen
           ? _laptopHero(context)
           : _mobileHero(),
     );
@@ -89,11 +88,11 @@ class HeroWidget extends StatelessWidget {
           ],
         )
             .animate()
-            .fadeIn(duration: 600.ms)
-            .scale(duration: 700.ms)
-            .moveY(begin: 8, end: -8, duration: 4.seconds)
+            .fadeIn(duration: const Duration(milliseconds: 600))
+            .scale(duration: const Duration(milliseconds: 700))
+            .moveY(begin: 8, end: -8, duration: const Duration(seconds: 4))
             .then()
-            .moveY(begin: -8, end: 8, duration: 4.seconds),
+            .moveY(begin: -8, end: 8, duration: const Duration(seconds: 4)),
 
         const Gap(28),
 
@@ -105,7 +104,7 @@ class HeroWidget extends StatelessWidget {
             height: 1.2,
           ),
           textAlign: TextAlign.center,
-        ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.2),
+        ).animate().fadeIn(duration: const Duration(milliseconds: 500)).slideY(begin: 0.2),
 
         const Gap(14),
 
@@ -155,8 +154,8 @@ class HeroWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         )
-            .animate(delay: 400.ms)
-            .fadeIn(duration: 500.ms)
+            .animate(delay: const Duration(milliseconds: 400))
+            .fadeIn(duration: const Duration(milliseconds: 500))
             .moveY(begin: 10, end: 0),
 
         const Gap(24),
@@ -251,7 +250,7 @@ class HeroWidget extends StatelessWidget {
                     color: AppColors.white,
                     height: 1.1,
                   ),
-                ).animate().fadeIn(duration: 500.ms).slideX(begin: -0.2),
+                ).animate().fadeIn(duration: const Duration(milliseconds: 500)).slideX(begin: -0.2),
 
                 const Gap(14),
 
@@ -301,8 +300,8 @@ class HeroWidget extends StatelessWidget {
                     ),
                   ),
                 )
-                    .animate(delay: 400.ms)
-                    .fadeIn(duration: 500.ms)
+                    .animate(delay: const Duration(milliseconds: 400))
+                    .fadeIn(duration: const Duration(milliseconds: 500))
                     .moveY(begin: 10, end: 0),
 
                 const Gap(24),
@@ -433,11 +432,11 @@ class HeroWidget extends StatelessWidget {
                           ],
                         )
                             .animate()
-                            .fadeIn(duration: 600.ms)
-                            .scale(duration: 700.ms)
-                            .moveY(begin: 8, end: -8, duration: 4.seconds)
+                            .fadeIn(duration: const Duration(milliseconds: 600))
+                            .scale(duration: const Duration(milliseconds: 700))
+                            .moveY(begin: 8, end: -8, duration: const Duration(seconds: 4))
                             .then()
-                            .moveY(begin: -8, end: 8, duration: 4.seconds),
+                            .moveY(begin: -8, end: 8, duration: const Duration(seconds: 4)),
                       ],
                     ),
                   );
@@ -485,11 +484,11 @@ class HeroWidget extends StatelessWidget {
           ],
         )
             .animate()
-            .fadeIn(duration: 600.ms)
-            .scale(duration: 700.ms)
-            .moveY(begin: 8, end: -8, duration: 4.seconds)
+            .fadeIn(duration: const Duration(milliseconds: 600))
+            .scale(duration: const Duration(milliseconds: 700))
+            .moveY(begin: 8, end: -8, duration: const Duration(seconds: 4))
             .then()
-            .moveY(begin: -8, end: 8, duration: 4.seconds),
+            .moveY(begin: -8, end: 8, duration: const Duration(seconds: 4)),
 
         const Gap(20),
 

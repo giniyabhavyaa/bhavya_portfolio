@@ -1,6 +1,5 @@
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,17 +13,17 @@ Future<void> _launchUrl(String url) async {
   }
 }
 
-class GlassCard extends StatelessWidget {
+class GlassCard extends StatefulWidget {
   final String title;
   final String subtitle;
   final String? liveUrl;
   final String? githubUrl;
   final String? youtube;
   final int index;
-  late final List<String> techStack;
+  final List<String> techStack;
   final String result;
 
-  GlassCard({
+  const GlassCard({
     super.key,
     required this.title,
     required this.subtitle,
@@ -36,7 +35,13 @@ class GlassCard extends StatelessWidget {
     this.result = "",
   });
 
-  final RxBool _isHover = false.obs;
+  @override
+  State<GlassCard> createState() => _GlassCardState();
+}
+
+class _GlassCardState extends State<GlassCard> {
+  bool _isHover = false;
+
   @override
   Widget build(BuildContext context) {
     if (context.isPhone) {
@@ -79,70 +84,55 @@ class GlassCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-
           Text(
-            title,
+            widget.title,
             style: dmSansW700.copyWith(
               color: Colors.white,
               fontSize: 24,
             ),
           ),
-
           const Gap(12),
-
           Text(
-            subtitle,
+            widget.subtitle,
             style: dmSansW400.copyWith(
               color: Colors.white70,
               height: 1.5,
               fontSize: 14,
             ),
           ),
-
           const Gap(16),
-
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: techStack.map(_techChip).toList(),
+            children: widget.techStack.map(_techChip).toList(),
           ),
-
           const Gap(16),
-
           Text(
-            result,
+            widget.result,
             style: dmSansW400.copyWith(
               color: Colors.white60,
               fontSize: 13,
               fontStyle: FontStyle.italic,
             ),
           ),
-
           const Gap(20),
-
           Row(
             children: [
-
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: () =>
-                      _launchUrl(youtube ?? liveUrl ?? ''),
+                      _launchUrl(widget.youtube ?? widget.liveUrl ?? ''),
                   icon: const Icon(Icons.play_arrow),
                   label: Text(
-                    youtube != null
-                        ? "Demo"
-                        : "Live",
+                    widget.youtube != null ? "Demo" : "Live",
                   ),
                 ),
               ),
-
-              if (githubUrl != null) ...[
+              if (widget.githubUrl != null) ...[
                 const Gap(10),
-
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () =>
-                        _launchUrl(githubUrl!),
+                    onPressed: () => _launchUrl(widget.githubUrl!),
                     icon: const Icon(Icons.code),
                     label: const Text("Code"),
                   ),
@@ -162,9 +152,8 @@ class GlassCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Text(
-            title,
+            widget.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: dmSansW700.copyWith(
@@ -172,12 +161,10 @@ class GlassCard extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-
           const Gap(10),
-
           Expanded(
             child: Text(
-              subtitle,
+              widget.subtitle,
               style: dmSansW700.copyWith(
                 fontSize: 13,
                 color: Colors.white,
@@ -186,17 +173,14 @@ class GlassCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-
           Wrap(
             spacing: 6,
             runSpacing: 6,
-            children: techStack.map(_techChip).toList(),
+            children: widget.techStack.map(_techChip).toList(),
           ),
-
           const Gap(12),
-
           Text(
-            result,
+            widget.result,
             style: dmSansW700.copyWith(
               fontSize: 13,
               color: Colors.white,
@@ -204,14 +188,12 @@ class GlassCard extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-
           const Gap(14),
-
           Row(
             children: [
               Expanded(child: _primaryButton()),
               const Gap(8),
-              if (githubUrl != null)
+              if (widget.githubUrl != null)
                 Expanded(child: _githubButton()),
             ],
           )
@@ -219,129 +201,113 @@ class GlassCard extends StatelessWidget {
       ),
     );
   }
+
   Widget _githubButton() {
     return OutlinedButton.icon(
-      onPressed: githubUrl == null
+      onPressed: widget.githubUrl == null
           ? null
-          : () => _launchUrl(githubUrl!),
+          : () => _launchUrl(widget.githubUrl!),
       icon: const Icon(Icons.code),
       label: const Text("Code"),
     );
   }
+
   Widget _primaryButton() {
-    final url = youtube ?? liveUrl;
+    final url = widget.youtube ?? widget.liveUrl;
 
     return ElevatedButton.icon(
-      onPressed: url == null
-          ? null
-          : () => _launchUrl(url),
+      onPressed: url == null ? null : () => _launchUrl(url),
       icon: const Icon(Icons.play_circle_fill),
       label: Text(
-        youtube != null ? "Watch Demo" : "View Live",
+        widget.youtube != null ? "Watch Demo" : "View Live",
       ),
     );
   }
 
   Widget desktopCard() {
-    return Obx(() {
-      final hover = _isHover.value;
+    final hover = _isHover;
 
-      return MouseRegion(
-        onEnter: (_) => _isHover.value = true,
-        onExit: (_) => _isHover.value = false,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          padding: const EdgeInsets.all(22),
-          transform: hover
-              ? (Matrix4.identity()
-            ..translate(0, -8)
-            ..scale(1.02))
-              : Matrix4.identity(),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            color: const Color(0xff131A2D).withValues(alpha: .85),
-            border: Border.all(
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHover = true),
+      onExit: (_) => setState(() => _isHover = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.all(22),
+        transform: hover
+            ? (Matrix4.translationValues(0, -8, 0) * Matrix4.diagonal3Values(1.02, 1.02, 1.0))
+            : Matrix4.identity(),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: const Color(0xff131A2D).withValues(alpha: .85),
+          border: Border.all(
+            color: hover
+                ? AppColors.themeColor
+                : Colors.white.withValues(alpha: .08),
+          ),
+          boxShadow: [
+            BoxShadow(
               color: hover
-                  ? AppColors.themeColor
-                  : Colors.white.withValues(alpha: .08),
+                  ? AppColors.themeColor.withValues(alpha: .18)
+                  : Colors.black.withValues(alpha: .15),
+              blurRadius: 25,
+              spreadRadius: 2,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: hover
-                    ? AppColors.themeColor.withValues(alpha: .18)
-                    : Colors.black.withValues(alpha: .15),
-                blurRadius: 25,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              Text(
-                title,
-                style: dmSansW700.copyWith(
-                  color: Colors.green,
-                  fontSize: 22,
-                ),
-              ),
-
-              const Gap(12),
-
-              Text(
-                subtitle,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: dmSansW400.copyWith(
-                  color: Colors.green,
-                  height: 1.6,
-                  fontSize: 14,
-                ),
-              ),
-
-              const Gap(18),
-
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: techStack.map(_techChip).toList(),
-              ),
-
-              const Spacer(),
-
-              Text(
-                result,
-                style: dmSansW400.copyWith(
-                  color: Colors.green,
-                  fontSize: 13,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-
-              const Gap(18),
-
-              Row(
-                children: [
-
-                  Expanded(
-                    child: _primaryButton(),
-                  ),
-
-                  if (githubUrl != null) ...[
-                    const Gap(10),
-
-                    Expanded(
-                      child: _githubButton(),
-                    ),
-                  ],
-                ],
-              )
-            ],
-          ),
+          ],
         ),
-      );
-    });
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.title,
+              style: dmSansW700.copyWith(
+                color: Colors.green,
+                fontSize: 22,
+              ),
+            ),
+            const Gap(12),
+            Text(
+              widget.subtitle,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: dmSansW400.copyWith(
+                color: Colors.green,
+                height: 1.6,
+                fontSize: 14,
+              ),
+            ),
+            const Gap(18),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: widget.techStack.map(_techChip).toList(),
+            ),
+            const Spacer(),
+            Text(
+              widget.result,
+              style: dmSansW400.copyWith(
+                color: Colors.green,
+                fontSize: 13,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            const Gap(18),
+            Row(
+              children: [
+                Expanded(
+                  child: _primaryButton(),
+                ),
+                if (widget.githubUrl != null) ...[
+                  const Gap(10),
+                  Expanded(
+                    child: _githubButton(),
+                  ),
+                ],
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _techChip(String tech) {
@@ -364,5 +330,3 @@ class GlassCard extends StatelessWidget {
     );
   }
 }
-
-

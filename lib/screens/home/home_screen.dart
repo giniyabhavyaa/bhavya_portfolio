@@ -28,6 +28,27 @@ class HomeScreen extends StatelessWidget {
       builder: (HomeController controller) {
         final width = MediaQuery.of(context).size.width;
         final isWide = width > 1200;
+        final staticMoons = HomeController.moons.map((moon) {
+          return Container(
+            width: moon.size,
+            height: moon.size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.white.withValues(alpha: 0.12),
+                  blurRadius: 18,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: Image.asset(
+              Assets.png.icMoon.path,
+              filterQuality: FilterQuality.low,
+            ),
+          );
+        }).toList();
+
         return Scaffold(
           backgroundColor: AppColors.color0F1122,
           appBar: AppBar(
@@ -38,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               "Bhavya Giniya",
               style: dmSansW800.copyWith(fontSize: 20, color: AppColors.white,fontWeight: FontWeight.bold),
             ),
-            actions: isWide ? [NavigatedButton()] : null,
+            actions: isWide ? [const NavigatedButton()] : null,
           ),
           drawer: isWide
               ? null
@@ -46,28 +67,35 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: AppColors.color15172D,
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: NavigatedButton(isDrawer: true),
+              child: const NavigatedButton(isDrawer: true),
             ),
           ),
           body: Stack(
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF0F1122),
-                      Color(0xFF05060F),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
               Positioned.fill(
-                child: Image.asset(
-                  Assets.png.icBackgroundImage2Png.path,
-                  filterQuality: FilterQuality.none,
-                  fit: BoxFit.cover,
+                child: RepaintBoundary(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFF0F1122),
+                              Color(0xFF05060F),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                        ),
+                      ),
+                      Image.asset(
+                        Assets.png.icBackgroundImage2Png.path,
+                        filterQuality: FilterQuality.none,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               AnimatedBuilder(
@@ -83,14 +111,14 @@ class HomeScreen extends StatelessWidget {
                   final screenWidth = MediaQuery.of(context).size.width;
 
                   return Stack(
-                    children: controller.moons.map((moon) {
+                    children: HomeController.moons.map((moon) {
                       final phase = moon.index * 0.7;
                       final floatY = sin((t * 2 * pi) + phase) * 6;
                       final floatX = cos((t * 2 * pi) + phase) * 4;
                       final scrollY = scrollOffset * moon.speed * 0.08;
                       final driftX = scrollOffset * moon.speed * 0.01;
                       final baseX =
-                          (screenWidth / (controller.moons.length + 1)) *
+                          (screenWidth / (HomeController.moons.length + 1)) *
                               (moon.index + 1);
                       final top = 160 + (moon.index * 100) + floatY + scrollY;
                       final left = baseX + floatX + driftX - (moon.size / 2);
@@ -101,29 +129,12 @@ class HomeScreen extends StatelessWidget {
                       return Positioned(
                         top: top,
                         left: left,
-                        child: RepaintBoundary(
-                          child: Transform.scale(
-                            scale: scale,
-                            child: Opacity(
-                              opacity: 0.7 + (moon.speed * 0.5),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.white.withValues(
-                                          alpha: 0.12),
-                                      blurRadius: 18,
-                                      spreadRadius: 2,
-                                    ),
-                                  ],
-                                ),
-                                child: Image.asset(
-                                  Assets.png.icMoon.path,
-                                  width: moon.size,
-                                  filterQuality: FilterQuality.low,
-                                ),
-                              ),
+                        child: Transform.scale(
+                          scale: scale,
+                          child: Opacity(
+                            opacity: 0.7 + (moon.speed * 0.5),
+                            child: RepaintBoundary(
+                              child: staticMoons[moon.index],
                             ),
                           ),
                         ),
@@ -132,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
-              ShootingStar(),
+              const ShootingStar(),
               const Positioned.fill(
                 child: ColoredBox(
                   color: Color(0x80000000),
@@ -142,43 +153,36 @@ class HomeScreen extends StatelessWidget {
         controller: controller.scrollController,
           child: Column(
             children: [
-              SectionWidget(
-                controller: controller,
+              const SectionWidget(
                 index: 0,
                 child: RepaintBoundary(
-                  child: HeroWidget( controller: controller)
+                  child: HeroWidget(),
                 ),
               ),
 
               SectionWidget(
-                controller: controller,
                 index: 1,
                 child: AboutWidget(isWide: isWide),
               ).animate().fadeIn(duration: 600.ms),
-              SectionWidget(
-                controller: controller,
+              const SectionWidget(
                 index: 2,
                 child: ServiceWidget(),
               ),
-              SectionWidget(
-                controller: controller,
+              const SectionWidget(
                 index: 3,
                 child: ProjectsWidget(),
               ),
               SectionWidget(
-                controller: controller,
                 index: 4,
                 child: SkillsWidget(isWide: isWide),
               ),
 
-              SectionWidget(
-                controller: controller,
+              const SectionWidget(
                 index: 5,
                 child: WhyChooseMeWidget(),
               ),
 
-              SectionWidget(
-                controller: controller,
+              const SectionWidget(
                 index: 6,
                 child: ContactWidget(),
               ),
