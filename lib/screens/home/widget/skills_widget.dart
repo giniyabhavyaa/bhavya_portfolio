@@ -30,11 +30,11 @@ class SkillsWidget extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               alignment: WrapAlignment.center,
-              children: controller.skills.map((skill) {
+              children: HomeController.skills.map((skill) {
                 return SkillPill(text: skill)
                     .animate()
                     .fadeIn(duration: 400.ms)
-                    .scale(begin: const Offset(0.9, 0.9)).animate().fadeIn().scale();
+                    .scale(begin: const Offset(0.9, 0.9));
               }).toList(),
             ),
           ],

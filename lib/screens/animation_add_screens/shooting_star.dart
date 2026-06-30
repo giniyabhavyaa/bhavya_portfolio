@@ -34,7 +34,14 @@ class _ShootingStarState extends State<ShootingStar>
     return RepaintBoundary(
       child: AnimatedBuilder(
         animation: controller,
-        builder: (_, __) {
+        child: Transform.rotate(
+          angle: -pi / 4,
+          child: const CustomPaint(
+            size: Size(120, 20),
+            painter: ShootingPainter(),
+          ),
+        ),
+        builder: (_, child) {
           final t = controller.value;
 
           return Transform.translate(
@@ -44,13 +51,7 @@ class _ShootingStarState extends State<ShootingStar>
             ),
             child: Opacity(
               opacity: 1 - t,
-              child: Transform.rotate(
-                angle: -pi / 4,
-                child: CustomPaint(
-                  size: const Size(120, 20),
-                  painter: ShootingPainter(),
-                ),
-              ),
+              child: child,
             ),
           );
         },
@@ -60,6 +61,8 @@ class _ShootingStarState extends State<ShootingStar>
 }
 
 class ShootingPainter extends CustomPainter {
+  const ShootingPainter();
+
   @override
   void paint(Canvas canvas, Size size) {
     final headPaint = Paint()

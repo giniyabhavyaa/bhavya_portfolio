@@ -8,7 +8,7 @@ class ProjectModel {
   final List<String> techStack;
   final String result;
 
-  ProjectModel({
+  const ProjectModel({
     required this.title,
     required this.subtitle,
     this.liveUrl,

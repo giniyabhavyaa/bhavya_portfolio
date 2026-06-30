@@ -3,14 +3,9 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import '../routes/route_helpers.dart';
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -26,7 +21,7 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       getPages: RouteHelpers.routes,
-      locale: Locale('en', 'US'),
+      locale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
     );
   }

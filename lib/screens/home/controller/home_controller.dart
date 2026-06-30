@@ -1,7 +1,7 @@
 import 'package:bhavya_portfolio/model/moon_data.dart';
 import 'package:bhavya_portfolio/model/project_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ScreenType;
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController with GetSingleTickerProviderStateMixin {
@@ -10,7 +10,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   final sectionKeys = List.generate(7, (index) => GlobalKey());
 
 
-  final List<String> item = [
+  static const List<String> item = [
     "Home",
     "About",
     "Services",
@@ -41,7 +41,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
 
 
-  final moons = [
+  static const moons = [
     MoonData(size: 90, speed: 0.08, index: 0),
     MoonData(size: 70, speed: 0.12, index: 1),
     MoonData(size: 110, speed: 0.06, index: 2),
@@ -52,7 +52,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
       "I build fast, scalable mobile apps using Flutter, Firebase, and clean architecture.";
 
 
-  final List<String> skills = [
+  static const List<String> skills = [
     "Flutter – Advanced",
     "Dart – Advanced",
     "GetX – Advanced",
@@ -81,7 +81,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   }
 
 
-  final featuredProject = ProjectModel(
+  static const featuredProject = ProjectModel(
     title: "Play Pitch",
     subtitle:
     "A smart box cricket & ground booking app where users can find nearby grounds, check live slot availability, and book matches instantly.",
@@ -99,7 +99,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   );
 
 
-  final List<ProjectModel> projects = [
+  static const List<ProjectModel> projects = [
     ProjectModel(
       title: "Finance Manager",
       subtitle: "Manage daily expenses easily",
@@ -167,7 +167,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   }
 
 
-  final List<Map<String, dynamic>> features = [
+  static const List<Map<String, dynamic>> features = [
     {
       "title": "Clean & Maintainable Code",
       "subtitle":

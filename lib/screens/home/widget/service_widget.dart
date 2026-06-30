@@ -97,6 +97,6 @@ class _GlowCard extends StatelessWidget {
           ),
         ],
       ),
-    ).animate().fadeIn().moveY(begin: 20);
+    );
   }
 }

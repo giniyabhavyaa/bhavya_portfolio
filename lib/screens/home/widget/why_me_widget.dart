@@ -56,7 +56,7 @@ class WhyChooseMeWidget extends StatelessWidget {
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: controller.features.length,
+          itemCount: HomeController.features.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isWide ? 2 : 1,
             crossAxisSpacing: 24,
@@ -64,7 +64,7 @@ class WhyChooseMeWidget extends StatelessWidget {
             childAspectRatio: isWide ? 3.2 : 1.9,
           ),
           itemBuilder: (context, index) {
-            final item = controller.features[index];
+            final item = HomeController.features[index];
 
             return Container(
               padding: const EdgeInsets.all(10),
@@ -188,7 +188,7 @@ class WhyChooseMeWidget extends StatelessWidget {
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: controller.features.length,
+            itemCount: HomeController.features.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 20,
@@ -197,7 +197,7 @@ class WhyChooseMeWidget extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
 
-              final item = controller.features[index];
+              final item = HomeController.features[index];
 
               return Container(
                 padding: const EdgeInsets.all(22),
@@ -291,9 +291,9 @@ class WhyChooseMeWidget extends StatelessWidget {
           const Gap(40),
 
           ...List.generate(
-            controller.features.length,
+            HomeController.features.length,
                 (index) {
-              final item = controller.features[index];
+              final item = HomeController.features[index];
 
               return Container(
                 margin: const EdgeInsets.only(bottom: 18),
