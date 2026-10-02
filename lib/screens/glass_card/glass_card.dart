@@ -1,17 +1,11 @@
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:bhavya_portfolio/utils/utility.dart';
+import 'package:bhavya_portfolio/utils/app_enums.dart';
+import 'package:bhavya_portfolio/utils/extension.dart';
 
-import '../../helpers/AppColors.dart';
-
-Future<void> _launchUrl(String url) async {
-  final uri = Uri.parse(url);
-  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-    throw 'Could not launch $url';
-  }
-}
+import '../../helpers/app_colors.dart';
 
 class GlassCard extends StatefulWidget {
   final String title;
@@ -44,22 +38,21 @@ class _GlassCardState extends State<GlassCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (context.isPhone) {
-      return mobileCard();
+    switch (context.deviceType) {
+      case DeviceType.mobile:
+        return mobileCard();
+      case DeviceType.tablet:
+        return tabletCard();
+      case DeviceType.desktop:
+        return desktopCard();
     }
-    if (context.isTablet) {
-      return tabletCard();
-    }
-    return desktopCard();
   }
 
   BoxDecoration _decoration() {
     return BoxDecoration(
       color: AppColors.color141718.withValues(alpha: 0.06),
       borderRadius: BorderRadius.circular(16),
-      border: Border.all(
-        color: AppColors.colorF2F3F6.withValues(alpha: 0.12),
-      ),
+      border: Border.all(color: AppColors.colorF2F3F6.withValues(alpha: 0.12)),
     );
   }
 
@@ -70,14 +63,9 @@ class _GlassCardState extends State<GlassCard> {
       decoration: BoxDecoration(
         color: const Color(0xff131A2D).withValues(alpha: .92),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: .08),
-        ),
+        border: Border.all(color: Colors.white.withValues(alpha: .08)),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: .2),
-            blurRadius: 18,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: .2), blurRadius: 18),
         ],
       ),
       child: Column(
@@ -86,16 +74,13 @@ class _GlassCardState extends State<GlassCard> {
         children: [
           Text(
             widget.title,
-            style: dmSansW700.copyWith(
-              color: Colors.white,
-              fontSize: 24,
-            ),
+            style: dmSansW700.copyWith(color: Colors.white, fontSize: 24),
           ),
           const Gap(12),
           Text(
             widget.subtitle,
             style: dmSansW400.copyWith(
-              color: Colors.white70,
+              color: Colors.white.withValues(alpha: .9),
               height: 1.5,
               fontSize: 14,
             ),
@@ -110,7 +95,7 @@ class _GlassCardState extends State<GlassCard> {
           Text(
             widget.result,
             style: dmSansW400.copyWith(
-              color: Colors.white60,
+              color: Colors.white.withValues(alpha: .85),
               fontSize: 13,
               fontStyle: FontStyle.italic,
             ),
@@ -120,26 +105,26 @@ class _GlassCardState extends State<GlassCard> {
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () =>
-                      _launchUrl(widget.youtube ?? widget.liveUrl ?? ''),
-                  icon: const Icon(Icons.play_arrow),
-                  label: Text(
-                    widget.youtube != null ? "Demo" : "Live",
+                  onPressed: () => Utility.launchExternalUrl(
+                    widget.youtube ?? widget.liveUrl ?? '',
                   ),
+                  icon: const Icon(Icons.play_arrow),
+                  label: Text(widget.youtube != null ? "Demo" : "Live"),
                 ),
               ),
               if (widget.githubUrl != null) ...[
                 const Gap(10),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () => _launchUrl(widget.githubUrl!),
+                    onPressed: () =>
+                        Utility.launchExternalUrl(widget.githubUrl!),
                     icon: const Icon(Icons.code),
                     label: const Text("Code"),
                   ),
                 ),
-              ]
+              ],
             ],
-          )
+          ),
         ],
       ),
     );
@@ -156,19 +141,13 @@ class _GlassCardState extends State<GlassCard> {
             widget.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: dmSansW700.copyWith(
-              fontSize: 20,
-              color: Colors.white,
-            ),
+            style: dmSansW700.copyWith(fontSize: 20, color: Colors.white),
           ),
           const Gap(10),
           Expanded(
             child: Text(
               widget.subtitle,
-              style: dmSansW700.copyWith(
-                fontSize: 13,
-                color: Colors.white,
-              ),
+              style: dmSansW700.copyWith(fontSize: 13, color: Colors.white),
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
             ),
@@ -181,10 +160,7 @@ class _GlassCardState extends State<GlassCard> {
           const Gap(12),
           Text(
             widget.result,
-            style: dmSansW700.copyWith(
-              fontSize: 13,
-              color: Colors.white,
-            ),
+            style: dmSansW700.copyWith(fontSize: 13, color: Colors.white),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -193,10 +169,9 @@ class _GlassCardState extends State<GlassCard> {
             children: [
               Expanded(child: _primaryButton()),
               const Gap(8),
-              if (widget.githubUrl != null)
-                Expanded(child: _githubButton()),
+              if (widget.githubUrl != null) Expanded(child: _githubButton()),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -206,7 +181,7 @@ class _GlassCardState extends State<GlassCard> {
     return OutlinedButton.icon(
       onPressed: widget.githubUrl == null
           ? null
-          : () => _launchUrl(widget.githubUrl!),
+          : () => Utility.launchExternalUrl(widget.githubUrl!),
       icon: const Icon(Icons.code),
       label: const Text("Code"),
     );
@@ -216,11 +191,9 @@ class _GlassCardState extends State<GlassCard> {
     final url = widget.youtube ?? widget.liveUrl;
 
     return ElevatedButton.icon(
-      onPressed: url == null ? null : () => _launchUrl(url),
+      onPressed: url == null ? null : () => Utility.launchExternalUrl(url),
       icon: const Icon(Icons.play_circle_fill),
-      label: Text(
-        widget.youtube != null ? "Watch Demo" : "View Live",
-      ),
+      label: Text(widget.youtube != null ? "Watch Demo" : "View Live"),
     );
   }
 
@@ -234,7 +207,8 @@ class _GlassCardState extends State<GlassCard> {
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.all(22),
         transform: hover
-            ? (Matrix4.translationValues(0, -8, 0) * Matrix4.diagonal3Values(1.02, 1.02, 1.0))
+            ? (Matrix4.translationValues(0, -8, 0) *
+                  Matrix4.diagonal3Values(1.02, 1.02, 1.0))
             : Matrix4.identity(),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
@@ -259,10 +233,7 @@ class _GlassCardState extends State<GlassCard> {
           children: [
             Text(
               widget.title,
-              style: dmSansW700.copyWith(
-                color: Colors.green,
-                fontSize: 22,
-              ),
+              style: dmSansW700.copyWith(color: Colors.white, fontSize: 22),
             ),
             const Gap(12),
             Text(
@@ -270,7 +241,7 @@ class _GlassCardState extends State<GlassCard> {
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: dmSansW400.copyWith(
-                color: Colors.green,
+                color: Colors.white.withValues(alpha: .9),
                 height: 1.6,
                 fontSize: 14,
               ),
@@ -285,7 +256,7 @@ class _GlassCardState extends State<GlassCard> {
             Text(
               widget.result,
               style: dmSansW400.copyWith(
-                color: Colors.green,
+                color: Colors.white.withValues(alpha: .85),
                 fontSize: 13,
                 fontStyle: FontStyle.italic,
               ),
@@ -293,17 +264,13 @@ class _GlassCardState extends State<GlassCard> {
             const Gap(18),
             Row(
               children: [
-                Expanded(
-                  child: _primaryButton(),
-                ),
+                Expanded(child: _primaryButton()),
                 if (widget.githubUrl != null) ...[
                   const Gap(10),
-                  Expanded(
-                    child: _githubButton(),
-                  ),
+                  Expanded(child: _githubButton()),
                 ],
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -312,20 +279,14 @@ class _GlassCardState extends State<GlassCard> {
 
   Widget _techChip(String tech) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: AppColors.themeColor.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         tech,
-        style: dmSansW500.copyWith(
-          fontSize: 11,
-          color: AppColors.themeColor,
-        ),
+        style: dmSansW500.copyWith(fontSize: 11, color: AppColors.themeColor),
       ),
     );
   }

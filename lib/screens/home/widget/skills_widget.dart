@@ -1,49 +1,37 @@
-import 'package:bhavya_portfolio/helpers/AppColors.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
-import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
+import 'package:bhavya_portfolio/screens/home/data/home_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-
 
 class SkillsWidget extends StatelessWidget {
-  final bool isWide;
-
-  const SkillsWidget({
-    super.key,
-    required this.isWide,
-  });
+  const SkillsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (HomeController controller) {
-        return Column(
-          children: [
-             Text(
-              "Skills",
-              style: dmSansW700.copyWith(fontSize: 28, color: AppColors.white),
-            ),
-             Gap(30),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              alignment: WrapAlignment.center,
-              children: HomeController.skills.map((skill) {
-                return SkillPill(text: skill)
-                    .animate()
-                    .fadeIn(duration: 400.ms)
-                    .scale(begin: const Offset(0.9, 0.9));
-              }).toList(),
-            ),
-          ],
-        );
-      },
+    return Column(
+      children: [
+        Text(
+          "Skills",
+          style: dmSansW700.copyWith(fontSize: 28, color: AppColors.white),
+        ),
+        Gap(30),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          alignment: WrapAlignment.center,
+          children: HomeData.skills.map((skill) {
+            return SkillPill(text: skill)
+                .animate()
+                .fadeIn(duration: 400.ms)
+                .scale(begin: const Offset(0.9, 0.9));
+          }).toList(),
+        ),
+      ],
     );
   }
 }
-
 
 class SkillPill extends StatelessWidget {
   final String text;

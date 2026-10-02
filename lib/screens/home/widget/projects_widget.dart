@@ -1,45 +1,29 @@
-import 'package:bhavya_portfolio/helpers/AppColors.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:bhavya_portfolio/screens/glass_card/glass_card.dart';
 import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-Future<void> launchProjectUrl(String url) async {
-  final uri = Uri.parse(url);
-
-  if (!await launchUrl(
-    uri,
-    mode: LaunchMode.externalApplication,
-  )) {
-    throw Exception('Could not launch $url');
-  }
-}
+import 'package:bhavya_portfolio/utils/utility.dart';
 
 class ProjectsWidget extends StatelessWidget {
   const ProjectsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (controller) {
-        if (context.isDesktopScreen) {
-          return _featuredProjectDesktop(controller);
-        }
+    if (context.isDesktopScreen) {
+      return _featuredProjectDesktop();
+    }
 
-        if (context.isTabletScreen) {
-          return _featuredProjectTablet(controller);
-        }
+    if (context.isTabletScreen) {
+      return _featuredProjectTablet();
+    }
 
-        return _featuredProjectMobile(controller);
-      },
-    );
+    return _featuredProjectMobile();
   }
 
-  Widget _featuredProjectDesktop(HomeController controller) {
+  Widget _featuredProjectDesktop() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -48,10 +32,7 @@ class ProjectsWidget extends StatelessWidget {
           Center(
             child: Text(
               "Projects",
-              style: dmSansW700.copyWith(
-                fontSize: 28,
-                color: AppColors.white,
-              ),
+              style: dmSansW700.copyWith(fontSize: 28, color: AppColors.white),
             ),
           ),
           const Gap(40),
@@ -75,10 +56,7 @@ class ProjectsWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text(
-                      "🚀",
-                      style: TextStyle(fontSize: 28),
-                    ),
+                    const Text("🚀", style: TextStyle(fontSize: 28)),
                     const Gap(10),
                     Text(
                       "Featured Project",
@@ -102,7 +80,7 @@ class ProjectsWidget extends StatelessWidget {
                   HomeController.featuredProject.subtitle,
                   style: dmSansW400.copyWith(
                     fontSize: 16,
-                    color: AppColors.colorF6F6F6.withValues(alpha: .85),
+                    color: AppColors.colorF6F6F6.withValues(alpha: .95),
                     height: 1.6,
                   ),
                 ),
@@ -110,7 +88,9 @@ class ProjectsWidget extends StatelessWidget {
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
-                  children: HomeController.featuredProject.techStack.map((tech) {
+                  children: HomeController.featuredProject.techStack.map((
+                    tech,
+                  ) {
                     return Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 14,
@@ -122,9 +102,7 @@ class ProjectsWidget extends StatelessWidget {
                       ),
                       child: Text(
                         tech,
-                        style: dmSansW500.copyWith(
-                          color: AppColors.themeColor,
-                        ),
+                        style: dmSansW500.copyWith(color: AppColors.themeColor),
                       ),
                     );
                   }).toList(),
@@ -134,7 +112,7 @@ class ProjectsWidget extends StatelessWidget {
                   HomeController.featuredProject.result,
                   style: dmSansW400.copyWith(
                     fontSize: 15,
-                    color: AppColors.white.withValues(alpha: .75),
+                    color: AppColors.white.withValues(alpha: .9),
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -143,9 +121,9 @@ class ProjectsWidget extends StatelessWidget {
                   children: [
                     if (HomeController.featuredProject.youtube != null)
                       ElevatedButton.icon(
-                        onPressed: () =>
-                            launchProjectUrl(
-                                HomeController.featuredProject.youtube!),
+                        onPressed: () => Utility.launchExternalUrl(
+                          HomeController.featuredProject.youtube!,
+                        ),
                         icon: const Icon(
                           Icons.play_circle_fill,
                           color: Colors.white,
@@ -162,9 +140,9 @@ class ProjectsWidget extends StatelessWidget {
                     const Gap(14),
                     if (HomeController.featuredProject.githubUrl != null)
                       OutlinedButton.icon(
-                        onPressed: () =>
-                            launchProjectUrl(
-                                HomeController.featuredProject.githubUrl!),
+                        onPressed: () => Utility.launchExternalUrl(
+                          HomeController.featuredProject.githubUrl!,
+                        ),
                         icon: const Icon(Icons.code),
                         label: const Text("View Code"),
                       ),
@@ -188,8 +166,7 @@ class ProjectsWidget extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: HomeController.projects.length,
-                gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
@@ -211,13 +188,13 @@ class ProjectsWidget extends StatelessWidget {
                 },
               );
             },
-          )
+          ),
         ],
       ),
     );
   }
 
-  Widget _featuredProjectTablet(HomeController controller) {
+  Widget _featuredProjectTablet() {
     return Column(
       children: [
         Container(
@@ -243,9 +220,7 @@ class ProjectsWidget extends StatelessWidget {
                   children: [
                     Text(
                       "🚀 Featured Project",
-                      style: dmSansW600.copyWith(
-                        color: AppColors.themeColor,
-                      ),
+                      style: dmSansW600.copyWith(color: AppColors.themeColor),
                     ),
                     const Gap(12),
                     Text(
@@ -259,7 +234,7 @@ class ProjectsWidget extends StatelessWidget {
                     Text(
                       HomeController.featuredProject.subtitle,
                       style: dmSansW400.copyWith(
-                        color: Colors.white70,
+                        color: Colors.white.withValues(alpha: .9),
                         height: 1.6,
                       ),
                     ),
@@ -267,7 +242,9 @@ class ProjectsWidget extends StatelessWidget {
                     Wrap(
                       spacing: 10,
                       runSpacing: 10,
-                      children: HomeController.featuredProject.techStack.map((tech) {
+                      children: HomeController.featuredProject.techStack.map((
+                        tech,
+                      ) {
                         return Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 12,
@@ -326,12 +303,13 @@ class ProjectsWidget extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: HomeController.projects.length,
-              gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                childAspectRatio: 1.8,
+                // Tablet cards include wrapped tech chips and two action buttons.
+                // Give them enough vertical space instead of clipping their content.
+                childAspectRatio: 1.4,
               ),
               itemBuilder: (context, index) {
                 final project = HomeController.projects[index];
@@ -349,12 +327,12 @@ class ProjectsWidget extends StatelessWidget {
               },
             );
           },
-        )
+        ),
       ],
     );
   }
 
-  Widget _featuredProjectMobile(HomeController controller) {
+  Widget _featuredProjectMobile() {
     return Column(
       children: [
         Container(
@@ -400,7 +378,7 @@ class ProjectsWidget extends StatelessWidget {
                 HomeController.featuredProject.subtitle,
                 style: dmSansW400.copyWith(
                   fontSize: 14,
-                  color: Colors.white70,
+                  color: Colors.white.withValues(alpha: .9),
                   height: 1.6,
                 ),
               ),
@@ -432,7 +410,7 @@ class ProjectsWidget extends StatelessWidget {
               Text(
                 HomeController.featuredProject.result,
                 style: dmSansW400.copyWith(
-                  color: Colors.white60,
+                  color: Colors.white.withValues(alpha: .85),
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -441,7 +419,7 @@ class ProjectsWidget extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    launchProjectUrl(
+                    Utility.launchExternalUrl(
                       HomeController.featuredProject.youtube!,
                     );
                   },
@@ -471,7 +449,7 @@ class ProjectsWidget extends StatelessWidget {
               youtube: project.youtube,
             );
           },
-        )
+        ),
       ],
     );
   }
