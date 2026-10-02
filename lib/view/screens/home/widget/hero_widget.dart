@@ -1,9 +1,9 @@
-import 'package:bhavya_portfolio/base/hire_me_button.dart';
 import 'package:bhavya_portfolio/gen/assets.gen.dart';
 import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
-import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
+import 'package:bhavya_portfolio/view/base/hire_me_button.dart';
+import 'package:bhavya_portfolio/view/screens/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

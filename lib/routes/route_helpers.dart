@@ -1,6 +1,5 @@
+import 'package:bhavya_portfolio/view/screens/home/home_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-
-import '../screens/home/home_screen.dart';
 
 class RouteHelpers {
   static const String homeScreen = '/';

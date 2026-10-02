@@ -1,3 +1,4 @@
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -5,7 +6,6 @@ import 'package:bhavya_portfolio/utils/utility.dart';
 import 'package:bhavya_portfolio/utils/app_enums.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
 
-import '../../helpers/app_colors.dart';
 
 class GlassCard extends StatefulWidget {
   final String title;

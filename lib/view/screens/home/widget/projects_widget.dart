@@ -1,8 +1,8 @@
 import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
-import 'package:bhavya_portfolio/screens/glass_card/glass_card.dart';
-import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
+import 'package:bhavya_portfolio/view/screens/glass_card/glass_card.dart';
+import 'package:bhavya_portfolio/view/screens/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:bhavya_portfolio/utils/utility.dart';

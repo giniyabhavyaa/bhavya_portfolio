@@ -1,4 +1,4 @@
-import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
+import 'package:bhavya_portfolio/view/screens/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

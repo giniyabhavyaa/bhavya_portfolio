@@ -1,7 +1,7 @@
-import 'package:bhavya_portfolio/screens/home/data/home_data.dart';
 import 'package:bhavya_portfolio/model/feature_model.dart';
 import 'package:bhavya_portfolio/model/project_model.dart';
 import 'package:bhavya_portfolio/utils/utility.dart';
+import 'package:bhavya_portfolio/view/screens/home/data/home_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

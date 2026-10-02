@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -10,44 +11,50 @@ class ShootingStar extends StatefulWidget {
 
 class _ShootingStarState extends State<ShootingStar>
     with SingleTickerProviderStateMixin {
-  late AnimationController controller;
+  late final AnimationController controller;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-
     controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
-    )..repeat();
+    );
+    _timer = Timer.periodic(const Duration(seconds: 10), (_) {
+      if (mounted) controller.forward(from: 0);
+    });
+    controller.forward();
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: AnimatedBuilder(
-        animation: controller,
-        child: Transform.rotate(
-          angle: -pi / 4,
-          child: const CustomPaint(
-            size: Size(120, 20),
-            painter: ShootingPainter(),
+    return IgnorePointer(
+      child: RepaintBoundary(
+        child: AnimatedBuilder(
+          animation: controller,
+          child: Transform.rotate(
+            angle: -pi / 4,
+            child: const CustomPaint(
+              size: Size(120, 20),
+              painter: ShootingPainter(),
+            ),
           ),
+          builder: (_, child) {
+            final t = controller.value;
+            return Transform.translate(
+              offset: Offset(50 + t * 400, 80 + t * 250),
+              child: Opacity(opacity: 1 - t, child: child),
+            );
+          },
         ),
-        builder: (_, child) {
-          final t = controller.value;
-
-          return Transform.translate(
-            offset: Offset(50 + (t * 400), 80 + (t * 250)),
-            child: Opacity(opacity: 1 - t, child: child),
-          );
-        },
       ),
     );
   }
@@ -73,3 +80,5 @@ class ShootingPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
+
+

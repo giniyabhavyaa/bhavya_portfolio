@@ -1,23 +1,24 @@
 import 'dart:math';
-import 'package:bhavya_portfolio/base/navigated_button.dart';
 import 'package:bhavya_portfolio/gen/assets.gen.dart';
 import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
-import 'package:bhavya_portfolio/screens/home/widget/about_widget.dart';
-import 'package:bhavya_portfolio/screens/home/widget/contact_widget.dart';
-import 'package:bhavya_portfolio/screens/home/widget/hero_widget.dart';
-import 'package:bhavya_portfolio/screens/home/widget/projects_widget.dart';
-import 'package:bhavya_portfolio/screens/home/widget/section_widget.dart';
-import 'package:bhavya_portfolio/screens/home/widget/service_widget.dart';
-import 'package:bhavya_portfolio/screens/home/widget/skills_widget.dart';
-import 'package:bhavya_portfolio/screens/animation_add_screens/shooting_star.dart';
-import 'package:bhavya_portfolio/screens/home/widget/why_me_widget.dart';
-import 'package:bhavya_portfolio/screens/home/data/home_data.dart';
+import 'package:bhavya_portfolio/view/base/moons_layer.dart';
+import 'package:bhavya_portfolio/view/base/navigated_button.dart';
+import 'package:bhavya_portfolio/view/screens/animation_add_screens/shooting_star.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/about_widget.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/contact_widget.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/hero_widget.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/projects_widget.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/section_widget.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/service_widget.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/skills_widget.dart';
+import 'package:bhavya_portfolio/view/screens/home/widget/why_me_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'controller/home_controller.dart';
+import 'data/home_data.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -119,50 +120,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              AnimatedBuilder(
-                animation: Listenable.merge([
-                  controller.scrollController,
-                  controller.floatController,
-                ]),
-                builder: (_, __) {
-                  final scrollOffset = controller.scrollController.hasClients
-                      ? controller.scrollController.offset
-                      : 0;
-                  final t = controller.floatController.value;
-                  final screenWidth = MediaQuery.of(context).size.width;
-
-                  return Stack(
-                    children: HomeData.moons.map((moon) {
-                      final phase = moon.index * 0.7;
-                      final floatY = sin((t * 2 * pi) + phase) * 6;
-                      final floatX = cos((t * 2 * pi) + phase) * 4;
-                      final scrollY = scrollOffset * moon.speed * 0.08;
-                      final driftX = scrollOffset * moon.speed * 0.01;
-                      final baseX =
-                          (screenWidth / (HomeData.moons.length + 1)) *
-                          (moon.index + 1);
-                      final top = 160 + (moon.index * 100) + floatY + scrollY;
-                      final left = baseX + floatX + driftX - (moon.size / 2);
-
-                      final scale = 0.95 + (sin((t * 2 * pi) + phase) * 0.03);
-
-                      return Positioned(
-                        top: top,
-                        left: left,
-                        child: Transform.scale(
-                          scale: scale,
-                          child: Opacity(
-                            opacity: 0.7 + (moon.speed * 0.5),
-                            child: RepaintBoundary(
-                              child: staticMoons[moon.index],
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  );
-                },
-              ),
+              MoonsLayer(controller: controller),
               const ShootingStar(),
               const Positioned.fill(
                 child: ColoredBox(color: Color(0x80000000)),

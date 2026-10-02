@@ -1,12 +1,12 @@
-import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
+import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
 import 'package:bhavya_portfolio/utils/app_enums.dart';
+import 'package:bhavya_portfolio/view/screens/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 
-import '../../../helpers/app_colors.dart';
-import '../../../helpers/styles.dart';
 
 class WhyChooseMeWidget extends StatelessWidget {
   const WhyChooseMeWidget({super.key});
