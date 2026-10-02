@@ -1,6 +1,6 @@
 import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
-import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
+import 'package:bhavya_portfolio/screens/home/data/home_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -21,7 +21,7 @@ class SkillsWidget extends StatelessWidget {
           spacing: 12,
           runSpacing: 12,
           alignment: WrapAlignment.center,
-          children: HomeController.skills.map((skill) {
+          children: HomeData.skills.map((skill) {
             return SkillPill(text: skill)
                 .animate()
                 .fadeIn(duration: 400.ms)

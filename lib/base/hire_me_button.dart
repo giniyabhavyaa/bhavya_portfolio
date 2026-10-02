@@ -2,26 +2,16 @@ import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:bhavya_portfolio/utils/utility.dart';
 
 class HireMeButton extends StatelessWidget {
   const HireMeButton({super.key});
 
   void _launchEmail() async {
-    final Uri emailUri = Uri(
-      scheme: 'mailto',
-      path: 'giniyabhavyaa@gmail.com',
-      queryParameters: {
-        'subject': 'Hiring Request',
-        'body': 'Hello BhavyaGiniya,',
-      },
+    await Utility.launchEmail(
+      subject: 'Hiring Request',
+      body: 'Hello BhavyaGiniya,',
     );
-
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri, mode: LaunchMode.externalApplication);
-    } else {
-      debugPrint('Could not launch $emailUri');
-    }
   }
 
   @override

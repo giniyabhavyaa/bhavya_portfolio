@@ -1,5 +1,6 @@
 import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
+import 'package:bhavya_portfolio/utils/app_enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -12,14 +13,14 @@ class WhyChooseMeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (true) {
-      case true when context.isMobileScreen:
+    switch (context.deviceType) {
+      case DeviceType.mobile:
         return _mobileView();
 
-      case true when context.isTabletScreen:
+      case DeviceType.tablet:
         return _tabletView();
 
-      default:
+      case DeviceType.desktop:
         return _desktopView(context);
     }
   }
@@ -96,7 +97,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                           color: Colors.white.withValues(alpha: 0.08),
                         ),
                         child: Icon(
-                          item["icon"],
+                          item.icon,
                           size: 30,
                           color: AppColors.white,
                         ),
@@ -109,7 +110,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              item["title"],
+                              item.title,
                               style: dmSansW700.copyWith(
                                 fontSize: 20,
                                 color: AppColors.white,
@@ -118,7 +119,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                             ),
                             Gap(12),
                             Text(
-                              item["subtitle"],
+                              item.description,
                               style: dmSansW400.copyWith(
                                 fontSize: 15,
                                 color: AppColors.white.withValues(alpha: .9),
@@ -203,7 +204,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: AppColors.themeColor.withValues(alpha: .12),
                       ),
-                      child: Icon(item["icon"], color: AppColors.themeColor),
+                      child: Icon(item.icon, color: AppColors.themeColor),
                     ),
 
                     const Gap(16),
@@ -213,7 +214,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            item["title"],
+                            item.title,
                             style: dmSansW700.copyWith(
                               color: Colors.white,
                               fontSize: 18,
@@ -222,7 +223,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                           const SizedBox(height: 8),
                           Expanded(
                             child: Text(
-                              item["subtitle"],
+                              item.description,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 4,
                               style: dmSansW400.copyWith(
@@ -285,13 +286,13 @@ class WhyChooseMeWidget extends StatelessWidget {
                     backgroundColor: AppColors.themeColor.withValues(
                       alpha: .15,
                     ),
-                    child: Icon(item["icon"], color: AppColors.themeColor),
+                    child: Icon(item.icon, color: AppColors.themeColor),
                   ),
 
                   const Gap(16),
 
                   Text(
-                    item["title"],
+                    item.title,
                     style: dmSansW700.copyWith(
                       color: Colors.white,
                       fontSize: 18,
@@ -301,7 +302,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                   const Gap(10),
 
                   Text(
-                    item["subtitle"],
+                    item.description,
                     style: dmSansW400.copyWith(
                       color: Colors.white.withValues(alpha: .9),
                       height: 1.6,

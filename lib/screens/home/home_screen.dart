@@ -12,6 +12,7 @@ import 'package:bhavya_portfolio/screens/home/widget/service_widget.dart';
 import 'package:bhavya_portfolio/screens/home/widget/skills_widget.dart';
 import 'package:bhavya_portfolio/screens/animation_add_screens/shooting_star.dart';
 import 'package:bhavya_portfolio/screens/home/widget/why_me_widget.dart';
+import 'package:bhavya_portfolio/screens/home/data/home_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
       builder: (HomeController controller) {
         final width = MediaQuery.of(context).size.width;
         final isWide = width > 1200;
-        final staticMoons = HomeController.moons.map((moon) {
+        final staticMoons = HomeData.moons.map((moon) {
           return Container(
             width: moon.size,
             height: moon.size,
@@ -55,13 +56,32 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: AppColors.color0F1122,
             elevation: 0,
             centerTitle: false,
-            title: Text(
-              "Bhavya Giniya",
-              style: dmSansW800.copyWith(
-                fontSize: 20,
-                color: AppColors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: AppColors.themeColor,
+                  child: ClipOval(
+                    child: Image.asset(
+                      Assets.png.icImage.path,
+                      width: 34,
+                      height: 34,
+                      fit: BoxFit.cover,
+                      filterQuality: FilterQuality.low,
+                    ),
+                  ),
+                ),
+                const Gap(10),
+                Text(
+                  "Bhavya Giniya",
+                  style: dmSansW800.copyWith(
+                    fontSize: 20,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             actions: isWide ? [const NavigatedButton()] : null,
           ),
@@ -112,15 +132,15 @@ class HomeScreen extends StatelessWidget {
                   final screenWidth = MediaQuery.of(context).size.width;
 
                   return Stack(
-                    children: HomeController.moons.map((moon) {
+                    children: HomeData.moons.map((moon) {
                       final phase = moon.index * 0.7;
                       final floatY = sin((t * 2 * pi) + phase) * 6;
                       final floatX = cos((t * 2 * pi) + phase) * 4;
                       final scrollY = scrollOffset * moon.speed * 0.08;
                       final driftX = scrollOffset * moon.speed * 0.01;
                       final baseX =
-                          (screenWidth / (HomeController.moons.length + 1)) *
-                              (moon.index + 1);
+                          (screenWidth / (HomeData.moons.length + 1)) *
+                          (moon.index + 1);
                       final top = 160 + (moon.index * 100) + floatY + scrollY;
                       final left = baseX + floatX + driftX - (moon.size / 2);
 

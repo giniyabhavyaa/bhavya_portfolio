@@ -2,7 +2,7 @@ import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:bhavya_portfolio/utils/utility.dart';
 
 class ContactWidget extends StatelessWidget {
   const ContactWidget({super.key});
@@ -73,8 +73,7 @@ class ContactWidget extends StatelessWidget {
                 ),
                 const Gap(28),
                 ElevatedButton(
-                  onPressed: () =>
-                      launchUrl(Uri.parse("mailto:giniyabhavyaa@gmail.com")),
+                  onPressed: Utility.launchEmail,
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
                     backgroundColor: AppColors.themeColor,

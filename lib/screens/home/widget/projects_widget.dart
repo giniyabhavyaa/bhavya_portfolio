@@ -5,15 +5,7 @@ import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-Future<void> launchProjectUrl(String url) async {
-  final uri = Uri.parse(url);
-
-  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-    throw Exception('Could not launch $url');
-  }
-}
+import 'package:bhavya_portfolio/utils/utility.dart';
 
 class ProjectsWidget extends StatelessWidget {
   const ProjectsWidget({super.key});
@@ -129,7 +121,7 @@ class ProjectsWidget extends StatelessWidget {
                   children: [
                     if (HomeController.featuredProject.youtube != null)
                       ElevatedButton.icon(
-                        onPressed: () => launchProjectUrl(
+                        onPressed: () => Utility.launchExternalUrl(
                           HomeController.featuredProject.youtube!,
                         ),
                         icon: const Icon(
@@ -148,7 +140,7 @@ class ProjectsWidget extends StatelessWidget {
                     const Gap(14),
                     if (HomeController.featuredProject.githubUrl != null)
                       OutlinedButton.icon(
-                        onPressed: () => launchProjectUrl(
+                        onPressed: () => Utility.launchExternalUrl(
                           HomeController.featuredProject.githubUrl!,
                         ),
                         icon: const Icon(Icons.code),
@@ -427,7 +419,9 @@ class ProjectsWidget extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    launchProjectUrl(HomeController.featuredProject.youtube!);
+                    Utility.launchExternalUrl(
+                      HomeController.featuredProject.youtube!,
+                    );
                   },
                   icon: const Icon(Icons.play_circle_fill),
                   label: const Text("Watch Demo"),

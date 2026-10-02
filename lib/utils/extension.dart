@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'app_enums.dart';
+
 extension ResponsiveExtension on BuildContext {
-  bool get isMobileScreen => MediaQuery.of(this).size.width < 600;
+  DeviceType get deviceType {
+    final width = MediaQuery.sizeOf(this).width;
+    if (width < 600) return DeviceType.mobile;
+    if (width < 1100) return DeviceType.tablet;
+    return DeviceType.desktop;
+  }
 
-  bool get isTabletScreen =>
-      MediaQuery.of(this).size.width >= 600 &&
-      MediaQuery.of(this).size.width < 1100;
+  bool get isMobileScreen => deviceType == DeviceType.mobile;
 
-  bool get isDesktopScreen => MediaQuery.of(this).size.width >= 1100;
+  bool get isTabletScreen => deviceType == DeviceType.tablet;
+
+  bool get isDesktopScreen => deviceType == DeviceType.desktop;
 }

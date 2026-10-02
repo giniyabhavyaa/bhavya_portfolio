@@ -1,17 +1,11 @@
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:bhavya_portfolio/utils/utility.dart';
+import 'package:bhavya_portfolio/utils/app_enums.dart';
+import 'package:bhavya_portfolio/utils/extension.dart';
 
 import '../../helpers/app_colors.dart';
-
-Future<void> _launchUrl(String url) async {
-  final uri = Uri.parse(url);
-  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-    throw 'Could not launch $url';
-  }
-}
 
 class GlassCard extends StatefulWidget {
   final String title;
@@ -44,13 +38,14 @@ class _GlassCardState extends State<GlassCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (context.isPhone) {
-      return mobileCard();
+    switch (context.deviceType) {
+      case DeviceType.mobile:
+        return mobileCard();
+      case DeviceType.tablet:
+        return tabletCard();
+      case DeviceType.desktop:
+        return desktopCard();
     }
-    if (context.isTablet) {
-      return tabletCard();
-    }
-    return desktopCard();
   }
 
   BoxDecoration _decoration() {
@@ -110,8 +105,9 @@ class _GlassCardState extends State<GlassCard> {
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () =>
-                      _launchUrl(widget.youtube ?? widget.liveUrl ?? ''),
+                  onPressed: () => Utility.launchExternalUrl(
+                    widget.youtube ?? widget.liveUrl ?? '',
+                  ),
                   icon: const Icon(Icons.play_arrow),
                   label: Text(widget.youtube != null ? "Demo" : "Live"),
                 ),
@@ -120,7 +116,8 @@ class _GlassCardState extends State<GlassCard> {
                 const Gap(10),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () => _launchUrl(widget.githubUrl!),
+                    onPressed: () =>
+                        Utility.launchExternalUrl(widget.githubUrl!),
                     icon: const Icon(Icons.code),
                     label: const Text("Code"),
                   ),
@@ -184,7 +181,7 @@ class _GlassCardState extends State<GlassCard> {
     return OutlinedButton.icon(
       onPressed: widget.githubUrl == null
           ? null
-          : () => _launchUrl(widget.githubUrl!),
+          : () => Utility.launchExternalUrl(widget.githubUrl!),
       icon: const Icon(Icons.code),
       label: const Text("Code"),
     );
@@ -194,7 +191,7 @@ class _GlassCardState extends State<GlassCard> {
     final url = widget.youtube ?? widget.liveUrl;
 
     return ElevatedButton.icon(
-      onPressed: url == null ? null : () => _launchUrl(url),
+      onPressed: url == null ? null : () => Utility.launchExternalUrl(url),
       icon: const Icon(Icons.play_circle_fill),
       label: Text(widget.youtube != null ? "Watch Demo" : "View Live"),
     );

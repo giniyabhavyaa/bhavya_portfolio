@@ -3,6 +3,7 @@ import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../screens/home/controller/home_controller.dart';
+import '../screens/home/data/home_data.dart';
 
 class NavigatedButton extends StatelessWidget {
   final bool isDrawer;
@@ -13,10 +14,10 @@ class NavigatedButton extends StatelessWidget {
     final controller = Get.find<HomeController>();
     return isDrawer
         ? Column(
-            children: HomeController.item.asMap().entries.map((entry) {
+            children: HomeData.navigationItems.map((item) {
               return ListTile(
                 title: Text(
-                  entry.value,
+                  item.title,
                   style: dmSansW800.copyWith(
                     fontSize: 15,
                     color: AppColors.white,
@@ -25,18 +26,18 @@ class NavigatedButton extends StatelessWidget {
                 ),
                 onTap: () {
                   Get.back();
-                  controller.scrollToSection(entry.key);
+                  controller.scrollToSection(item.sectionIndex);
                 },
               );
             }).toList(),
           )
         : Row(
             mainAxisSize: MainAxisSize.min,
-            children: HomeController.item.asMap().entries.map((entry) {
+            children: HomeData.navigationItems.map((item) {
               return TextButton(
-                onPressed: () => controller.scrollToSection(entry.key),
+                onPressed: () => controller.scrollToSection(item.sectionIndex),
                 child: Text(
-                  entry.value,
+                  item.title,
                   style: dmSansW800.copyWith(
                     fontSize: 15,
                     color: AppColors.white,
