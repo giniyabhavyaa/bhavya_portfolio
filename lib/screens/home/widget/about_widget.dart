@@ -1,4 +1,4 @@
-import 'package:bhavya_portfolio/helpers/AppColors.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -33,7 +33,6 @@ class AboutWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-
           Text(
             "About Me",
             style: dmSansW800.copyWith(
@@ -46,19 +45,16 @@ class AboutWidget extends StatelessWidget {
 
           Text(
             "A Flutter Developer who builds modern mobile & web apps with clean architecture, "
-                "GetX state management, animations, API integration, Firebase and "
-                "pixel-perfect responsive UI.",
+            "GetX state management, animations, API integration, Firebase and "
+            "pixel-perfect responsive UI.",
             style: dmSansW400.copyWith(
               fontSize: isWide ? 17 : 15,
-              color: AppColors.color797979,
+              color: AppColors.white.withValues(alpha: .92),
               height: 1.6,
             ),
           ),
         ],
       ),
-    )
-        .animate()
-        .fadeIn(duration: 600.ms)
-        .scale(begin: const Offset(0.95, 0.95));
+    ).animate().fadeIn(duration: 600.ms).scale(begin: const Offset(0.95, 0.95));
   }
 }

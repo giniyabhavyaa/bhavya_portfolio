@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SectionWidget extends StatelessWidget {
-  const SectionWidget({
-    super.key,
-    required this.index,
-    required this.child,
-  });
+  const SectionWidget({super.key, required this.index, required this.child});
 
   final int index;
   final Widget child;

@@ -6,9 +6,6 @@ class RouteHelpers {
   static const String homeScreen = '/';
 
   static List<GetPage<dynamic>> routes = [
-    GetPage(
-      name: '/',
-      page: () => const HomeScreen(),
-    ),
+    GetPage(name: '/', page: () => const HomeScreen()),
   ];
 }

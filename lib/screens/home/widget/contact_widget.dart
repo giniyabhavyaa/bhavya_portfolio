@@ -1,9 +1,8 @@
-import 'package:bhavya_portfolio/helpers/AppColors.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class ContactWidget extends StatelessWidget {
   const ContactWidget({super.key});
@@ -12,9 +11,7 @@ class ContactWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(
-        width < 600 ? 20 : 45,
-      ),
+      padding: EdgeInsets.all(width < 600 ? 20 : 45),
       margin: EdgeInsets.symmetric(
         horizontal: width >= 1100
             ? 345
@@ -39,43 +36,29 @@ class ContactWidget extends StatelessWidget {
         children: [
           Text(
             "Let's Work Together",
-            style: dmSansW700.copyWith(
-              color: Colors.white,
-              fontSize: 30,
-            ),
+            style: dmSansW700.copyWith(color: Colors.white, fontSize: 30),
           ),
           const Gap(10),
           Text(
             "Available for freelance & full-time roles.",
             textAlign: TextAlign.center,
-            style: dmSansW400.copyWith(
-              color: Colors.white70,
-              fontSize: 16,
-            ),
+            style: dmSansW400.copyWith(color: Colors.white70, fontSize: 16),
           ),
           const Gap(35),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 28,
-              vertical: 30,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 30),
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(22),
-              border: Border.all(
-                color: Colors.white.withValues(alpha: 0.08),
-              ),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
             ),
             child: Column(
               children: [
                 Text(
                   "Let’s build your next app 🚀",
                   textAlign: TextAlign.center,
-                  style: dmSansW700.copyWith(
-                    color: Colors.white,
-                    fontSize: 26,
-                  ),
+                  style: dmSansW700.copyWith(color: Colors.white, fontSize: 26),
                 ),
 
                 const Gap(14),
@@ -90,9 +73,8 @@ class ContactWidget extends StatelessWidget {
                 ),
                 const Gap(28),
                 ElevatedButton(
-                  onPressed: () => launchUrl(
-                    Uri.parse("mailto:giniyabhavyaa@gmail.com"),
-                  ),
+                  onPressed: () =>
+                      launchUrl(Uri.parse("mailto:giniyabhavyaa@gmail.com")),
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
                     backgroundColor: AppColors.themeColor,
@@ -106,7 +88,7 @@ class ContactWidget extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    children:  [
+                    children: [
                       Icon(Icons.send_rounded, color: Colors.white),
                       Gap(10),
                       Text(

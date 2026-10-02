@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../gen/fonts.gen.dart';
-import 'AppColors.dart';
+import 'app_colors.dart';
 
 const TextStyle dmSansW200 = TextStyle(
   fontFamily: FontFamily.dMSans,

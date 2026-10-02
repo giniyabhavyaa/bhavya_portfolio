@@ -1,4 +1,4 @@
-import 'package:bhavya_portfolio/helpers/AppColors.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -15,7 +15,7 @@ class ServiceWidget extends StatelessWidget {
           "Services",
           style: dmSansW700.copyWith(fontSize: 28, color: AppColors.white),
         ),
-         Gap(30),
+        Gap(30),
         Wrap(
           spacing: 20,
           runSpacing: 20,
@@ -24,24 +24,25 @@ class ServiceWidget extends StatelessWidget {
             _GlowCard(
               icon: Icons.phone_android,
               title: "📱 Mobile App Development",
-              desc: "Building high-performance Flutter apps with smooth user experience.",
+              desc:
+                  "Building high-performance Flutter apps with smooth user experience.",
             ),
             _GlowCard(
               icon: Icons.api,
               title: "🔗 API Integration & Backend Connectivity",
-              desc: "Secure REST API integration with Firebase & backend services.",
+              desc:
+                  "Secure REST API integration with Firebase & backend services.",
             ),
             _GlowCard(
               icon: Icons.design_services,
               title: "🎨 Responsive UI/UX Design",
-              desc: "Modern, responsive and visually appealing UI designs for all devices.",
+              desc:
+                  "Modern, responsive and visually appealing UI designs for all devices.",
             ),
           ],
         ),
       ],
-    ).animate()
-        .fadeIn(duration: 500.ms)
-        .moveY(begin: 20, end: 0);
+    ).animate().fadeIn(duration: 500.ms).moveY(begin: 20, end: 0);
   }
 }
 
@@ -69,7 +70,7 @@ class _GlowCard extends StatelessWidget {
             color: AppColors.themeColor.withValues(alpha: 0.25),
             blurRadius: 25,
             spreadRadius: 2,
-            offset:  Offset(0, 10),
+            offset: Offset(0, 10),
           ),
         ],
       ),
@@ -77,7 +78,7 @@ class _GlowCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, size: 40, color: AppColors.themeColor),
-           Gap(14),
+          Gap(14),
           Text(
             title,
             style: dmSansW600.copyWith(

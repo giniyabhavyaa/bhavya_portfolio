@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:bhavya_portfolio/base/navigated_button.dart';
 import 'package:bhavya_portfolio/gen/assets.gen.dart';
-import 'package:bhavya_portfolio/helpers/AppColors.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:bhavya_portfolio/screens/home/widget/about_widget.dart';
 import 'package:bhavya_portfolio/screens/home/widget/contact_widget.dart';
@@ -57,19 +57,23 @@ class HomeScreen extends StatelessWidget {
             centerTitle: false,
             title: Text(
               "Bhavya Giniya",
-              style: dmSansW800.copyWith(fontSize: 20, color: AppColors.white,fontWeight: FontWeight.bold),
+              style: dmSansW800.copyWith(
+                fontSize: 20,
+                color: AppColors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             actions: isWide ? [const NavigatedButton()] : null,
           ),
           drawer: isWide
               ? null
               : Drawer(
-            backgroundColor: AppColors.color15172D,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: const NavigatedButton(isDrawer: true),
-            ),
-          ),
+                  backgroundColor: AppColors.color15172D,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: const NavigatedButton(isDrawer: true),
+                  ),
+                ),
           body: Stack(
             children: [
               Positioned.fill(
@@ -80,10 +84,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              Color(0xFF0F1122),
-                              Color(0xFF05060F),
-                            ],
+                            colors: [Color(0xFF0F1122), Color(0xFF05060F)],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                           ),
@@ -123,8 +124,7 @@ class HomeScreen extends StatelessWidget {
                       final top = 160 + (moon.index * 100) + floatY + scrollY;
                       final left = baseX + floatX + driftX - (moon.size / 2);
 
-                      final scale =
-                          0.95 + (sin((t * 2 * pi) + phase) * 0.03);
+                      final scale = 0.95 + (sin((t * 2 * pi) + phase) * 0.03);
 
                       return Positioned(
                         top: top,
@@ -145,67 +145,44 @@ class HomeScreen extends StatelessWidget {
               ),
               const ShootingStar(),
               const Positioned.fill(
-                child: ColoredBox(
-                  color: Color(0x80000000),
+                child: ColoredBox(color: Color(0x80000000)),
+              ),
+              SingleChildScrollView(
+                controller: controller.scrollController,
+                child: Column(
+                  children: [
+                    const SectionWidget(
+                      index: 0,
+                      child: RepaintBoundary(child: HeroWidget()),
+                    ),
+
+                    SectionWidget(
+                      index: 1,
+                      child: AboutWidget(isWide: isWide),
+                    ).animate().fadeIn(duration: 600.ms),
+                    const SectionWidget(index: 2, child: ServiceWidget()),
+                    const SectionWidget(index: 3, child: ProjectsWidget()),
+                    SectionWidget(index: 4, child: SkillsWidget()),
+
+                    const SectionWidget(index: 5, child: WhyChooseMeWidget()),
+
+                    const SectionWidget(index: 6, child: ContactWidget()),
+                    Gap(40),
+                    Text(
+                      "© 2026 • Bhavya Giniya • Flutter Developer",
+                      style: dmSansW400.copyWith(
+                        fontSize: 14,
+                        color: AppColors.colorBCBCBC,
+                      ),
+                    ),
+                    Gap(40),
+                  ],
                 ),
               ),
-        SingleChildScrollView(
-        controller: controller.scrollController,
-          child: Column(
-            children: [
-              const SectionWidget(
-                index: 0,
-                child: RepaintBoundary(
-                  child: HeroWidget(),
-                ),
-              ),
-
-              SectionWidget(
-                index: 1,
-                child: AboutWidget(isWide: isWide),
-              ).animate().fadeIn(duration: 600.ms),
-              const SectionWidget(
-                index: 2,
-                child: ServiceWidget(),
-              ),
-              const SectionWidget(
-                index: 3,
-                child: ProjectsWidget(),
-              ),
-              SectionWidget(
-                index: 4,
-                child: SkillsWidget(isWide: isWide),
-              ),
-
-              const SectionWidget(
-                index: 5,
-                child: WhyChooseMeWidget(),
-              ),
-
-              const SectionWidget(
-                index: 6,
-                child: ContactWidget(),
-              ),
-               Gap(40),
-              Text(
-                "© 2026 • Bhavya Giniya • Flutter Developer",
-                style: dmSansW400.copyWith(
-                  fontSize: 14,
-                  color: AppColors.colorBCBCBC,
-                ),
-              ),
-               Gap(40),
             ],
           ),
-        ),
-        ],
-        ),
         );
       },
     );
   }
 }
-
-
-
-
