@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:bhavya_portfolio/gen/assets.gen.dart';
 import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
@@ -18,7 +17,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'controller/home_controller.dart';
-import 'data/home_data.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -30,27 +28,6 @@ class HomeScreen extends StatelessWidget {
       builder: (HomeController controller) {
         final width = MediaQuery.of(context).size.width;
         final isWide = width > 1200;
-        final staticMoons = HomeData.moons.map((moon) {
-          return Container(
-            width: moon.size,
-            height: moon.size,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.white.withValues(alpha: 0.12),
-                  blurRadius: 18,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
-            child: Image.asset(
-              Assets.png.icMoon.path,
-              filterQuality: FilterQuality.low,
-            ),
-          );
-        }).toList();
-
         return Scaffold(
           backgroundColor: AppColors.color0F1122,
           appBar: AppBar(
@@ -73,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Gap(10),
+                 Gap(10),
                 Text(
                   "Bhavya Giniya",
                   style: dmSansW800.copyWith(
@@ -91,35 +68,12 @@ class HomeScreen extends StatelessWidget {
               : Drawer(
                   backgroundColor: AppColors.color15172D,
                   child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: const NavigatedButton(isDrawer: true),
+                    padding:  EdgeInsets.all(20),
+                    child:  NavigatedButton(isDrawer: true),
                   ),
                 ),
           body: Stack(
             children: [
-              Positioned.fill(
-                child: RepaintBoundary(
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFF0F1122), Color(0xFF05060F)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                      Image.asset(
-                        Assets.png.icBackgroundImage2Png.path,
-                        filterQuality: FilterQuality.none,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               MoonsLayer(controller: controller),
               const ShootingStar(),
               const Positioned.fill(

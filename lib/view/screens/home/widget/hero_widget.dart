@@ -87,10 +87,7 @@ class HeroWidget extends StatelessWidget {
             )
             .animate()
             .fadeIn(duration: const Duration(milliseconds: 600))
-            .scale(duration: const Duration(milliseconds: 700))
-            .moveY(begin: 8, end: -8, duration: const Duration(seconds: 4))
-            .then()
-            .moveY(begin: -8, end: 8, duration: const Duration(seconds: 4)),
+            .scale(duration: const Duration(milliseconds: 700)),
 
         const Gap(28),
 
@@ -395,82 +392,63 @@ class HeroWidget extends StatelessWidget {
               onExit: controller.resetTilt,
               child: ValueListenableBuilder<Offset>(
                 valueListenable: controller.tilt,
-                builder: (_, tilt, child) {
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    transform: Matrix4.identity()
-                      ..rotateX(tilt.dx)
-                      ..rotateY(tilt.dy),
-                    alignment: Alignment.center,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Container(
-                                  width: 280,
-                                  height: 280,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: RadialGradient(
-                                      colors: [
-                                        AppColors.themeColor.withValues(
-                                          alpha: 0.45,
-                                        ),
-                                        AppColors.themeColor.withValues(
-                                          alpha: 0.15,
-                                        ),
-                                        Colors.transparent,
-                                      ],
-                                      stops: const [0.4, 0.7, 1],
+                child:
+                    Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              width: 280,
+                              height: 280,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
+                                  colors: [
+                                    AppColors.themeColor.withValues(
+                                      alpha: 0.45,
                                     ),
-                                  ),
+                                    AppColors.themeColor.withValues(
+                                      alpha: 0.15,
+                                    ),
+                                    Colors.transparent,
+                                  ],
+                                  stops: const [0.4, 0.7, 1],
                                 ),
-                                Container(
-                                  width: 400,
-                                  height: 400,
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(28),
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        AppColors.themeColor.withValues(
-                                          alpha: 0.6,
-                                        ),
-                                        Colors.transparent,
-                                      ],
-                                    ),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(22),
-                                    child: Image.asset(
-                                      Assets.png.icImage.path,
-                                      filterQuality: FilterQuality.low,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                            .animate()
-                            .fadeIn(duration: const Duration(milliseconds: 600))
-                            .scale(duration: const Duration(milliseconds: 700))
-                            .moveY(
-                              begin: 8,
-                              end: -8,
-                              duration: const Duration(seconds: 4),
-                            )
-                            .then()
-                            .moveY(
-                              begin: -8,
-                              end: 8,
-                              duration: const Duration(seconds: 4),
+                              ),
                             ),
-                      ],
-                    ),
-                  );
-                },
+                            Container(
+                              width: 400,
+                              height: 400,
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(28),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.themeColor.withValues(alpha: 0.6),
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(22),
+                                child: Image.asset(
+                                  Assets.png.icImage.path,
+                                  filterQuality: FilterQuality.low,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                        .animate()
+                        .fadeIn(duration: const Duration(milliseconds: 600))
+                        .scale(duration: const Duration(milliseconds: 700)),
+                builder: (_, tilt, portrait) => Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..rotateX(tilt.dx)
+                    ..rotateY(tilt.dy),
+                  child: portrait,
+                ),
               ),
             );
           },
@@ -515,10 +493,7 @@ class HeroWidget extends StatelessWidget {
             )
             .animate()
             .fadeIn(duration: const Duration(milliseconds: 600))
-            .scale(duration: const Duration(milliseconds: 700))
-            .moveY(begin: 8, end: -8, duration: const Duration(seconds: 4))
-            .then()
-            .moveY(begin: -8, end: 8, duration: const Duration(seconds: 4)),
+            .scale(duration: const Duration(milliseconds: 700)),
 
         const Gap(20),
 
@@ -573,8 +548,7 @@ class _ActionIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+          child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),

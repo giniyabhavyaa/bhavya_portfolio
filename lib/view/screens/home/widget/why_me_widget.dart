@@ -50,7 +50,7 @@ class WhyChooseMeWidget extends StatelessWidget {
             ),
           ),
         ),
-        const Gap(60),
+         Gap(60),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

@@ -38,22 +38,9 @@ class _ShootingStarState extends State<ShootingStar>
   Widget build(BuildContext context) {
     return IgnorePointer(
       child: RepaintBoundary(
-        child: AnimatedBuilder(
-          animation: controller,
-          child: Transform.rotate(
-            angle: -pi / 4,
-            child: const CustomPaint(
-              size: Size(120, 20),
-              painter: ShootingPainter(),
-            ),
-          ),
-          builder: (_, child) {
-            final t = controller.value;
-            return Transform.translate(
-              offset: Offset(50 + t * 400, 80 + t * 250),
-              child: Opacity(opacity: 1 - t, child: child),
-            );
-          },
+        child: CustomPaint(
+          size: const Size(120, 20),
+          painter: ShootingPainter(controller),
         ),
       ),
     );
@@ -61,24 +48,34 @@ class _ShootingStarState extends State<ShootingStar>
 }
 
 class ShootingPainter extends CustomPainter {
-  const ShootingPainter();
+  ShootingPainter(this.animation) : super(repaint: animation);
+
+  final Animation<double> animation;
+
+  static final _headPaint = Paint();
+  static final _trailPaint = Paint();
+  static final _trailShader = const LinearGradient(
+    colors: [Colors.white, Colors.transparent],
+  ).createShader(
+    const Rect.fromLTWH(10, 9, 100, 2),
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
-    final headPaint = Paint()..color = Colors.white;
+    final t = animation.value;
+    canvas.save();
+    canvas.translate(50 + t * 400, 80 + t * 250);
+    canvas.rotate(-pi / 4);
 
-    final trailPaint = Paint()
-      ..shader = const LinearGradient(
-        colors: [Colors.white, Colors.transparent],
-      ).createShader(Rect.fromLTWH(0, 0, 100, 2));
-
-    canvas.drawCircle(const Offset(5, 10), 3, headPaint);
-
-    canvas.drawRect(const Rect.fromLTWH(10, 9, 100, 2), trailPaint);
+    _headPaint.color = Colors.white.withValues(alpha: 1 - t);
+    _trailPaint
+      ..color = Colors.white.withValues(alpha: 1 - t)
+      ..shader = _trailShader;
+    canvas.drawCircle(const Offset(5, 10), 3, _headPaint);
+    canvas.drawRect(const Rect.fromLTWH(10, 9, 100, 2), _trailPaint);
+    canvas.restore();
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
-
-
