@@ -14,24 +14,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsPngGen {
   const $AssetsPngGen();
 
-  /// File path: assets/png/ic_back_ground.png
-  AssetGenImage get icBackGround =>
-      const AssetGenImage('assets/png/ic_back_ground.png');
-
-  /// File path: assets/png/ic_background_image.png
-  AssetGenImage get icBackgroundImage =>
-      const AssetGenImage('assets/png/ic_background_image.png');
-
   /// File path: assets/png/ic_background_image2.png.jpeg
   AssetGenImage get icBackgroundImage2Png =>
       const AssetGenImage('assets/png/ic_background_image2.png.jpeg');
-
-  /// File path: assets/png/ic_eamil.png
-  AssetGenImage get icEamil => const AssetGenImage('assets/png/ic_eamil.png');
-
-  /// File path: assets/png/ic_githube.png
-  AssetGenImage get icGithube =>
-      const AssetGenImage('assets/png/ic_githube.png');
 
   /// File path: assets/png/ic_image.png
   AssetGenImage get icImage => const AssetGenImage('assets/png/ic_image.png');
@@ -40,15 +25,7 @@ class $AssetsPngGen {
   AssetGenImage get icMoon => const AssetGenImage('assets/png/ic_moon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
-    icBackGround,
-    icBackgroundImage,
-    icBackgroundImage2Png,
-    icEamil,
-    icGithube,
-    icImage,
-    icMoon,
-  ];
+  List<AssetGenImage> get values => [icBackgroundImage2Png, icImage, icMoon];
 }
 
 class Assets {

@@ -13,20 +13,19 @@ class ShootingStar extends StatefulWidget {
 
 class _ShootingStarState extends State<ShootingStar>
     with SingleTickerProviderStateMixin {
-  late AnimationController controller;
+  late final AnimationController _controller;
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-
-    controller = AnimationController(
+    _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
     );
     _timer = Timer.periodic(const Duration(seconds: 6), (_) {
-      if (mounted && !controller.isAnimating) {
-        controller.forward(from: 0);
+      if (mounted && !_controller.isAnimating) {
+        _controller.forward(from: 0);
       }
     });
   }
@@ -34,7 +33,7 @@ class _ShootingStarState extends State<ShootingStar>
   @override
   void dispose() {
     _timer?.cancel();
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -42,26 +41,7 @@ class _ShootingStarState extends State<ShootingStar>
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: AnimatedBuilder(
-        animation: controller,
-        builder: (_, __) {
-          if (!controller.isAnimating) {
-            return const SizedBox.shrink();
-          }
-          final t = controller.value;
-          final progress = t;
-
-          return Transform.translate(
-            offset: Offset(50 + (progress * 400), 80 + (progress * 250)),
-            child: Opacity(
-              opacity: 1 - t,
-              child: Transform.rotate(
-                angle: -pi / 4,
-                child: CustomPaint(
-                  size: const Size(120, 20),
-                  painter: ShootingPainter(),
-                ),
-              ),
-            ),
+        animation: _controller,
         child: Transform.rotate(
           angle: -pi / 4,
           child: const CustomPaint(
@@ -69,12 +49,13 @@ class _ShootingStarState extends State<ShootingStar>
             painter: ShootingPainter(),
           ),
         ),
-        builder: (_, child) {
-          final t = controller.value;
+        builder: (context, child) {
+          if (!_controller.isAnimating) return const SizedBox.shrink();
 
+          final progress = _controller.value;
           return Transform.translate(
-            offset: Offset(50 + (t * 400), 80 + (t * 250)),
-            child: Opacity(opacity: 1 - t, child: child),
+            offset: Offset(50 + progress * 400, 80 + progress * 250),
+            child: Opacity(opacity: 1 - progress, child: child),
           );
         },
       ),
@@ -87,21 +68,16 @@ class ShootingPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final headPaint = Paint()..color = Colors.white;
     final headPaint = Paint()..color = AppColors.white;
-
     final trailPaint = Paint()
       ..shader = const LinearGradient(
-        colors: [Colors.white, Colors.transparent],
-      ).createShader(Rect.fromLTWH(0, 0, 100, 2));
         colors: [AppColors.white, AppColors.transparent],
-      ).createShader(Rect.fromLTWH(0, 0, 100, 2));
+      ).createShader(const Rect.fromLTWH(0, 0, 100, 2));
 
     canvas.drawCircle(const Offset(5, 10), 3, headPaint);
-
     canvas.drawRect(const Rect.fromLTWH(10, 9, 100, 2), trailPaint);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant ShootingPainter oldDelegate) => false;
 }

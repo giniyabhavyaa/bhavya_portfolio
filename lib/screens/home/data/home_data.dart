@@ -1,5 +1,4 @@
 import 'package:bhavya_portfolio/model/feature_model.dart';
-import 'package:bhavya_portfolio/model/moon_data.dart';
 import 'package:bhavya_portfolio/model/navigation_item.dart';
 import 'package:bhavya_portfolio/model/project_model.dart';
 import 'package:bhavya_portfolio/model/service_model.dart';
@@ -20,14 +19,6 @@ class HomeData {
     NavigationItem(title: 'Skills', sectionIndex: 4),
     NavigationItem(title: 'Why Me', sectionIndex: 5),
     NavigationItem(title: 'Contact', sectionIndex: 6),
-  ];
-
-  static const moons = [
-    MoonData(size: 90, speed: 0.08, index: 0),
-    MoonData(size: 70, speed: 0.12, index: 1),
-    MoonData(size: 110, speed: 0.06, index: 2),
-    MoonData(size: 65, speed: 0.15, index: 3),
-    MoonData(size: 55, speed: 0.18, index: 4),
   ];
 
   static const skills = [
