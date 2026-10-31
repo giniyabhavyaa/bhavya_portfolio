@@ -513,6 +513,35 @@ class HeroWidget extends StatelessWidget {
               fontSize: 16, color: AppColors.color797979),
         ).animate().fadeIn(),
 
+        const Gap(15),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _ActionIcon(
+              icon: FontAwesomeIcons.github.data,
+              tooltip: "GitHub",
+              onTap: controller.openGithub,
+            ),
+            const Gap(16),
+            _ActionIcon(
+              icon: Icons.email,
+              tooltip: "Email",
+              onTap: controller.openEmail,
+            ),
+            const Gap(16),
+            _ActionIcon(
+              icon: Icons.description_rounded,
+              tooltip: "Resume",
+              onTap: controller.openResume,
+            ),
+            const Gap(16),
+            _ActionIcon(
+              icon: FontAwesomeIcons.linkedin.data,
+              tooltip: "LinkedIn",
+              onTap: controller.openLinkedin,
+            ),
+          ],
+        ),
         const Gap(30),
         HireMeButton(),
       ],

@@ -1,10 +1,9 @@
-import 'package:bhavya_portfolio/model/moon_data.dart';
 import 'package:bhavya_portfolio/model/project_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ScreenType;
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeController extends GetxController with GetSingleTickerProviderStateMixin {
+class HomeController extends GetxController {
   final scrollController = ScrollController();
 
   final sectionKeys = List.generate(7, (index) => GlobalKey());
@@ -23,31 +22,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   double tiltX = 0.0;
   double tiltY = 0.0;
 
-  late AnimationController floatController;
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    floatController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 6),
-    )..repeat(reverse: true);
-  }
-
-
-
-
-
-
-
-  final moons = [
-    MoonData(size: 90, speed: 0.08, index: 0),
-    MoonData(size: 70, speed: 0.12, index: 1),
-    MoonData(size: 110, speed: 0.06, index: 2),
-    MoonData(size: 65, speed: 0.15, index: 3),
-    MoonData(size: 55, speed: 0.18, index: 4),
-  ];
   final String fullText =
       "I build fast, scalable mobile apps using Flutter, Firebase, and clean architecture.";
 
@@ -72,12 +47,13 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   void updateTilt(Offset position) {
     tiltY = (position.dx - 150) / 600;
     tiltX = -(position.dy - 150) / 600;
-
+    update(['heroTilt']);
   }
 
   void resetTilt(value) {
     tiltX = 0;
     tiltY = 0;
+    update(['heroTilt']);
   }
 
 
@@ -205,7 +181,6 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   @override
   void dispose() {
     scrollController.dispose();
-    floatController.dispose();
     super.dispose();
   }
 
