@@ -1,6 +1,6 @@
 import 'package:bhavya_portfolio/base/hire_me_button.dart';
 import 'package:bhavya_portfolio/gen/assets.gen.dart';
-import 'package:bhavya_portfolio/helpers/AppColors.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:bhavya_portfolio/screens/home/controller/home_controller.dart';
 import 'package:bhavya_portfolio/utils/extension.dart';
@@ -8,35 +8,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get.dart';
 
 class HeroWidget extends StatelessWidget {
-  const HeroWidget({
-    super.key,
-    required this.controller,
-  });
+  const HeroWidget({super.key});
 
-  final HomeController controller;
+  HomeController get controller => Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        vertical: context.isDesktop
+        vertical: context.isDesktopScreen
             ? 140
-            : context.isTablet
+            : context.isTabletScreen
             ? 100
             : 70,
-        horizontal: context.isDesktop
+        horizontal: context.isDesktopScreen
             ? 80
-            : context.isTablet
+            : context.isTabletScreen
             ? 48
             : 20,
       ),
-      child: context.isDesktop
+      child: context.isDesktopScreen
           ? _desktopHero()
-          : context.isTablet
+          : context.isTabletScreen
           ? _laptopHero(context)
           : _mobileHero(),
     );
@@ -47,65 +44,68 @@ class HeroWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: 280,
-              height: 280,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppColors.themeColor.withValues(alpha: 0.45),
-                    AppColors.themeColor.withValues(alpha: 0.15),
-                    Colors.transparent,
-                  ],
-                  stops: const [0.4, 0.7, 1],
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 280,
+                  height: 280,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        AppColors.themeColor.withValues(alpha: 0.45),
+                        AppColors.themeColor.withValues(alpha: 0.15),
+                        AppColors.transparent,
+                      ],
+                      stops: const [0.4, 0.7, 1],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              width: 220,
-              height: 220,
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                gradient: LinearGradient(
-                  colors: [
-                    AppColors.themeColor.withValues(alpha: 0.6),
-                    Colors.transparent,
-                  ],
+                Container(
+                  width: 220,
+                  height: 220,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.themeColor.withValues(alpha: 0.6),
+                        AppColors.transparent,
+                      ],
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      Assets.png.icImage.path,
+                      filterQuality: FilterQuality.low,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  Assets.png.icImage.path,
-                  filterQuality: FilterQuality.low,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ],
-        )
+              ],
+            )
             .animate()
-            .fadeIn(duration: 600.ms)
-            .scale(duration: 700.ms)
-            .moveY(begin: 8, end: -8, duration: 4.seconds)
+            .fadeIn(duration: const Duration(milliseconds: 600))
+            .scale(duration: const Duration(milliseconds: 700))
+            .moveY(begin: 8, end: -8, duration: const Duration(seconds: 4))
             .then()
-            .moveY(begin: -8, end: 8, duration: 4.seconds),
+            .moveY(begin: -8, end: 8, duration: const Duration(seconds: 4)),
 
         const Gap(28),
 
         Text(
-          "Flutter Developer Who Builds Scalable Apps 🚀",
-          style: dmSansW800.copyWith(
-            fontSize: 36,
-            color: AppColors.white,
-            height: 1.2,
-          ),
-          textAlign: TextAlign.center,
-        ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.2),
+              "Flutter Developer Who Builds Scalable Apps 🚀",
+              style: dmSansW200.copyWith(
+                fontSize: 36,
+                color: AppColors.white,
+                height: 1.2,
+              ),
+              textAlign: TextAlign.center,
+            )
+            .animate()
+            .fadeIn(duration: const Duration(milliseconds: 500))
+            .slideY(begin: 0.2),
 
         const Gap(14),
 
@@ -113,12 +113,14 @@ class HeroWidget extends StatelessWidget {
           tween: IntTween(begin: 0, end: controller.fullText.length),
           duration: const Duration(seconds: 2),
           builder: (context, value, child) {
-            final currentText = controller.fullText
-                .substring(0, value.clamp(0, controller.fullText.length));
+            final currentText = controller.fullText.substring(
+              0,
+              value.clamp(0, controller.fullText.length),
+            );
             return RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                style: dmSansW500.copyWith(
+                style: dmSansW200.copyWith(
                   fontSize: 16,
                   color: AppColors.white.withValues(alpha: 0.9),
                 ),
@@ -126,7 +128,7 @@ class HeroWidget extends StatelessWidget {
                   TextSpan(text: controller.getNormalText(currentText)),
                   TextSpan(
                     text: controller.getHighlightText(currentText),
-                    style: TextStyle(color: AppColors.themeColor),
+                    style: dmSansW200.copyWith(color: AppColors.themeColor),
                   ),
                   TextSpan(text: controller.getRemainingText(currentText)),
                 ],
@@ -138,25 +140,25 @@ class HeroWidget extends StatelessWidget {
         const Gap(14),
 
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: AppColors.themeColor.withValues(alpha: 0.1),
-            border: Border.all(
-              color: AppColors.themeColor.withValues(alpha: 0.3),
-            ),
-          ),
-          child: Text(
-            "Available for freelance projects | Fast delivery | Clean code",
-            style: dmSansW500.copyWith(
-              fontSize: 13,
-              color: AppColors.themeColor.withValues(alpha: 0.80),
-            ),
-            textAlign: TextAlign.center,
-          ),
-        )
-            .animate(delay: 400.ms)
-            .fadeIn(duration: 500.ms)
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: AppColors.themeColor.withValues(alpha: 0.1),
+                border: Border.all(
+                  color: AppColors.themeColor.withValues(alpha: 0.3),
+                ),
+              ),
+              child: Text(
+                "Available for freelance projects | Fast delivery | Clean code",
+                style: dmSansW200.copyWith(
+                  fontSize: 13,
+                  color: AppColors.themeColor.withValues(alpha: 0.80),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+            .animate(delay: const Duration(milliseconds: 400))
+            .fadeIn(duration: const Duration(milliseconds: 500))
             .moveY(begin: 10, end: 0),
 
         const Gap(24),
@@ -201,12 +203,14 @@ class HeroWidget extends StatelessWidget {
               onPressed: () => controller.scrollToSection(3),
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: AppColors.themeColor),
-                padding:
-                const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 22,
+                  vertical: 16,
+                ),
               ),
               child: Text(
                 "View Projects",
-                style: dmSansW300.copyWith(
+                style: dmSansW200.copyWith(
                   fontSize: 14,
                   color: AppColors.white,
                 ),
@@ -230,11 +234,11 @@ class HeroWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(24),
               color: AppColors.black.withValues(alpha: 0.35),
               border: Border.all(
-                color: Colors.white.withValues(alpha: 0.08),
+                color: AppColors.white.withValues(alpha: 0.08),
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.25),
+                  color: AppColors.black.withValues(alpha: 0.25),
                   blurRadius: 30,
                   offset: const Offset(0, 20),
                 ),
@@ -245,13 +249,16 @@ class HeroWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Flutter Developer Who Builds Scalable Apps 🚀",
-                  style: dmSansW800.copyWith(
-                    fontSize: 46,
-                    color: AppColors.white,
-                    height: 1.1,
-                  ),
-                ).animate().fadeIn(duration: 500.ms).slideX(begin: -0.2),
+                      "Flutter Developer Who Builds Scalable Apps 🚀",
+                      style: dmSansW200.copyWith(
+                        fontSize: 46,
+                        color: AppColors.white,
+                        height: 1.1,
+                      ),
+                    )
+                    .animate()
+                    .fadeIn(duration: const Duration(milliseconds: 500))
+                    .slideX(begin: -0.2),
 
                 const Gap(14),
 
@@ -260,10 +267,12 @@ class HeroWidget extends StatelessWidget {
                   duration: const Duration(seconds: 2),
                   builder: (context, value, child) {
                     final currentText = controller.fullText.substring(
-                        0, value.clamp(0, controller.fullText.length));
+                      0,
+                      value.clamp(0, controller.fullText.length),
+                    );
                     return RichText(
                       text: TextSpan(
-                        style: dmSansW500.copyWith(
+                        style: dmSansW200.copyWith(
                           fontSize: 18,
                           color: AppColors.white.withValues(alpha: 0.9),
                         ),
@@ -271,10 +280,13 @@ class HeroWidget extends StatelessWidget {
                           TextSpan(text: controller.getNormalText(currentText)),
                           TextSpan(
                             text: controller.getHighlightText(currentText),
-                            style: TextStyle(color: AppColors.themeColor),
+                            style: dmSansW200.copyWith(
+                              color: AppColors.themeColor,
+                            ),
                           ),
                           TextSpan(
-                              text: controller.getRemainingText(currentText)),
+                            text: controller.getRemainingText(currentText),
+                          ),
                         ],
                       ),
                     );
@@ -284,25 +296,27 @@ class HeroWidget extends StatelessWidget {
                 const Gap(16),
 
                 Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.themeColor.withValues(alpha: 0.1),
-                    border: Border.all(
-                      color: AppColors.themeColor.withValues(alpha: 0.3),
-                    ),
-                  ),
-                  child: Text(
-                    "Available for freelance projects | Fast delivery | Clean code",
-                    style: dmSansW500.copyWith(
-                      fontSize: 13,
-                      color: AppColors.themeColor.withValues(alpha: .80),
-                    ),
-                  ),
-                )
-                    .animate(delay: 400.ms)
-                    .fadeIn(duration: 500.ms)
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.themeColor.withValues(alpha: 0.1),
+                        border: Border.all(
+                          color: AppColors.themeColor.withValues(alpha: 0.3),
+                        ),
+                      ),
+                      child: Text(
+                        "Available for freelance projects | Fast delivery | Clean code",
+                        style: dmSansW200.copyWith(
+                          fontSize: 13,
+                          color: AppColors.themeColor.withValues(alpha: .80),
+                        ),
+                      ),
+                    )
+                    .animate(delay: const Duration(milliseconds: 400))
+                    .fadeIn(duration: const Duration(milliseconds: 500))
                     .moveY(begin: 10, end: 0),
 
                 const Gap(24),
@@ -348,12 +362,16 @@ class HeroWidget extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: AppColors.themeColor),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 22, vertical: 16),
+                          horizontal: 22,
+                          vertical: 16,
+                        ),
                       ),
                       child: Text(
                         "View Projects",
-                        style: dmSansW300.copyWith(
-                            fontSize: 14, color: AppColors.white),
+                        style: dmSansW200.copyWith(
+                          fontSize: 14,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ],
@@ -379,65 +397,80 @@ class HeroWidget extends StatelessWidget {
                 );
               },
               onExit: controller.resetTilt,
-              child: GetBuilder<HomeController>(
-                id: 'heroTilt',
-                builder: (controller) {
+              child: ValueListenableBuilder<Offset>(
+                valueListenable: controller.tilt,
+                builder: (_, tilt, child) {
                   return AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     transform: Matrix4.identity()
-                      ..rotateX(controller.tiltX)
-                      ..rotateY(controller.tiltY),
+                      ..rotateX(tilt.dx)
+                      ..rotateY(tilt.dy),
                     alignment: Alignment.center,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
                         Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              width: 280,
-                              height: 280,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                gradient: RadialGradient(
-                                  colors: [
-                                    AppColors.themeColor.withValues(alpha: 0.45),
-                                    AppColors.themeColor.withValues(alpha: 0.15),
-                                    Colors.transparent,
-                                  ],
-                                  stops: const [0.4, 0.7, 1],
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: 280,
+                                  height: 280,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: RadialGradient(
+                                      colors: [
+                                        AppColors.themeColor.withValues(
+                                          alpha: 0.45,
+                                        ),
+                                        AppColors.themeColor.withValues(
+                                          alpha: 0.15,
+                                        ),
+                                        AppColors.transparent,
+                                      ],
+                                      stops: const [0.4, 0.7, 1],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Container(
-                              width: 400,
-                              height: 400,
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(28),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    AppColors.themeColor.withValues(alpha: 0.6),
-                                    Colors.transparent,
-                                  ],
+                                Container(
+                                  width: 400,
+                                  height: 400,
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(28),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        AppColors.themeColor.withValues(
+                                          alpha: 0.6,
+                                        ),
+                                        AppColors.transparent,
+                                      ],
+                                    ),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(22),
+                                    child: Image.asset(
+                                      Assets.png.icImage.path,
+                                      filterQuality: FilterQuality.low,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(22),
-                                child: Image.asset(
-                                  Assets.png.icImage.path,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
+                              ],
+                            )
                             .animate()
-                            .fadeIn(duration: 600.ms)
-                            .scale(duration: 700.ms)
-                            .moveY(begin: 8, end: -8, duration: 4.seconds)
+                            .fadeIn(duration: const Duration(milliseconds: 600))
+                            .scale(duration: const Duration(milliseconds: 700))
+                            .moveY(
+                              begin: 8,
+                              end: -8,
+                              duration: const Duration(seconds: 4),
+                            )
                             .then()
-                            .moveY(begin: -8, end: 8, duration: 4.seconds),
+                            .moveY(
+                              begin: -8,
+                              end: 8,
+                              duration: const Duration(seconds: 4),
+                            ),
                       ],
                     ),
                   );
@@ -455,53 +488,55 @@ class HeroWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: 220,
-              height: 220,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    AppColors.themeColor.withValues(alpha: 0.4),
-                    Colors.transparent,
-                  ],
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 220,
+                  height: 220,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.themeColor.withValues(alpha: 0.4),
+                        AppColors.transparent,
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            CircleAvatar(
-              radius: 90,
-              backgroundColor: AppColors.white,
-              child: ClipOval(
-                child: Image.asset(
-                  Assets.png.icImage.path,
-                  width: 180,
-                  height: 180,
-                  fit: BoxFit.cover,
+                CircleAvatar(
+                  radius: 90,
+                  backgroundColor: AppColors.white,
+                  child: ClipOval(
+                    child: Image.asset(
+                      Assets.png.icImage.path,
+                      width: 180,
+                      height: 180,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
-        )
+              ],
+            )
             .animate()
-            .fadeIn(duration: 600.ms)
-            .scale(duration: 700.ms)
-            .moveY(begin: 8, end: -8, duration: 4.seconds)
+            .fadeIn(duration: const Duration(milliseconds: 600))
+            .scale(duration: const Duration(milliseconds: 700))
+            .moveY(begin: 8, end: -8, duration: const Duration(seconds: 4))
             .then()
-            .moveY(begin: -8, end: 8, duration: 4.seconds),
+            .moveY(begin: -8, end: 8, duration: const Duration(seconds: 4)),
 
         const Gap(20),
 
         Text(
           "Hi, I'm Bhavya 👋",
-          style: dmSansW800.copyWith(fontSize: 32, color: AppColors.white),
+          style: dmSansW200.copyWith(fontSize: 32, color: AppColors.white),
         ).animate().fadeIn(),
 
         Text(
           "Building beautiful & performant apps with Flutter.",
-          style: dmSansW400.copyWith(
-              fontSize: 14, color: AppColors.color797979),
+          style: dmSansW200.copyWith(
+            fontSize: 14,
+            color: AppColors.color797979,
+          ),
           textAlign: TextAlign.center,
         ).animate().fadeIn(),
 
@@ -509,8 +544,10 @@ class HeroWidget extends StatelessWidget {
 
         Text(
           "Flutter Developer • GetX • Firebase • API",
-          style: dmSansW500.copyWith(
-              fontSize: 16, color: AppColors.color797979),
+          style: dmSansW200.copyWith(
+            fontSize: 16,
+            color: AppColors.color797979,
+          ),
         ).animate().fadeIn(),
 
         const Gap(15),

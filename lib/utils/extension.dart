@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'app_enum.dart';
-
-ScreenType getScreenType(double width) => switch (width) {
-  >= 1200 => ScreenType.desktop,
-  >= 768 => ScreenType.laptop,
-  _ => ScreenType.mobile,
-};
+import 'app_enums.dart';
 
 extension ResponsiveExtension on BuildContext {
-  bool get isMobile => MediaQuery.sizeOf(this).width < 768;
+  DeviceType get deviceType {
+    final width = MediaQuery.sizeOf(this).width;
+    if (width < 600) return DeviceType.mobile;
+    if (width < 1100) return DeviceType.tablet;
+    return DeviceType.desktop;
+  }
 
-  bool get isTablet =>
-      MediaQuery.sizeOf(this).width >= 768 &&
-      MediaQuery.sizeOf(this).width < 1200;
+  bool get isMobileScreen => deviceType == DeviceType.mobile;
 
-  bool get isDesktop => MediaQuery.sizeOf(this).width >= 1200;
+  bool get isTabletScreen => deviceType == DeviceType.tablet;
+
+  bool get isDesktopScreen => deviceType == DeviceType.desktop;
 }

@@ -1,4 +1,6 @@
 import 'package:bhavya_portfolio/base/navigated_button.dart';
+import 'package:bhavya_portfolio/gen/assets.gen.dart';
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:bhavya_portfolio/helpers/AppColors.dart';
 import 'package:bhavya_portfolio/helpers/styles.dart';
 import 'package:bhavya_portfolio/screens/home/widget/about_widget.dart';
@@ -10,6 +12,7 @@ import 'package:bhavya_portfolio/screens/home/widget/section_widget.dart';
 import 'package:bhavya_portfolio/screens/home/widget/service_widget.dart';
 import 'package:bhavya_portfolio/screens/home/widget/skills_widget.dart';
 import 'package:bhavya_portfolio/screens/home/widget/why_me_widget.dart';
+import 'package:bhavya_portfolio/screens/home/data/home_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -36,17 +39,17 @@ class HomeScreen extends StatelessWidget {
               "Bhavya Giniya",
               style: dmSansW800.copyWith(fontSize: 20, color: AppColors.white,fontWeight: FontWeight.bold),
             ),
-            actions: isWide ? [NavigatedButton()] : null,
+            actions: isWide ? [const NavigatedButton()] : null,
           ),
           drawer: isWide
               ? null
               : Drawer(
-            backgroundColor: AppColors.color15172D,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: NavigatedButton(isDrawer: true),
-            ),
-          ),
+                  backgroundColor: AppColors.color15172D,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: const NavigatedButton(isDrawer: true),
+                  ),
+                ),
           body: Stack(
             children: [
               const AnimatedBackground(),
@@ -113,7 +116,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
