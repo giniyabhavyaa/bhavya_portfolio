@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class ShootingStar extends StatefulWidget {
 class _ShootingStarState extends State<ShootingStar>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -18,30 +20,36 @@ class _ShootingStarState extends State<ShootingStar>
 
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
-    )..repeat();
+      duration: const Duration(milliseconds: 900),
+    );
+    _timer = Timer.periodic(const Duration(seconds: 6), (_) {
+      if (mounted && !controller.isAnimating) {
+        controller.forward(from: 0);
+      }
+    });
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     controller.dispose();
     super.dispose();
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: AnimatedBuilder(
         animation: controller,
         builder: (_, __) {
+          if (!controller.isAnimating) {
+            return const SizedBox.shrink();
+          }
           final t = controller.value;
+          final progress = t;
 
           return Transform.translate(
-            offset: Offset(
-              50 + (t * 400),
-              80 + (t * 250),
-            ),
+            offset: Offset(50 + (progress * 400), 80 + (progress * 250)),
             child: Opacity(
               opacity: 1 - t,
               child: Transform.rotate(
@@ -62,34 +70,16 @@ class _ShootingStarState extends State<ShootingStar>
 class ShootingPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final headPaint = Paint()
-      ..color = Colors.white;
+    final headPaint = Paint()..color = Colors.white;
 
     final trailPaint = Paint()
       ..shader = const LinearGradient(
-        colors: [
-          Colors.white,
-          Colors.transparent,
-        ],
-      ).createShader(
-        Rect.fromLTWH(0, 0, 100, 2),
-      );
+        colors: [Colors.white, Colors.transparent],
+      ).createShader(Rect.fromLTWH(0, 0, 100, 2));
 
-    canvas.drawCircle(
-      const Offset(5, 10),
-      3,
-      headPaint,
-    );
+    canvas.drawCircle(const Offset(5, 10), 3, headPaint);
 
-    canvas.drawRect(
-      const Rect.fromLTWH(
-        10,
-        9,
-        100,
-        2,
-      ),
-      trailPaint,
-    );
+    canvas.drawRect(const Rect.fromLTWH(10, 9, 100, 2), trailPaint);
   }
 
   @override
