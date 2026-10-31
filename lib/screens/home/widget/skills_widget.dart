@@ -14,7 +14,7 @@ class SkillsWidget extends StatelessWidget {
       children: [
         Text(
           "Skills",
-          style: dmSansW700.copyWith(fontSize: 28, color: AppColors.white),
+          style: dmSansW200.copyWith(fontSize: 28, color: AppColors.white),
         ),
         Gap(30),
         Wrap(
@@ -58,7 +58,7 @@ class SkillPill extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: dmSansW500.copyWith(
+        style: dmSansW200.copyWith(
           fontSize: 13,
           color: AppColors.white,
           letterSpacing: 0.3,

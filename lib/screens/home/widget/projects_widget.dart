@@ -32,7 +32,7 @@ class ProjectsWidget extends StatelessWidget {
           Center(
             child: Text(
               "Projects",
-              style: dmSansW700.copyWith(fontSize: 28, color: AppColors.white),
+              style: dmSansW200.copyWith(fontSize: 28, color: AppColors.white),
             ),
           ),
           const Gap(40),
@@ -56,11 +56,11 @@ class ProjectsWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text("🚀", style: TextStyle(fontSize: 28)),
+                    Text("🚀", style: dmSansW200.copyWith(fontSize: 28)),
                     const Gap(10),
                     Text(
                       "Featured Project",
-                      style: dmSansW700.copyWith(
+                      style: dmSansW200.copyWith(
                         fontSize: 24,
                         color: AppColors.white,
                       ),
@@ -70,7 +70,7 @@ class ProjectsWidget extends StatelessWidget {
                 const Gap(20),
                 Text(
                   HomeController.featuredProject.title,
-                  style: dmSansW700.copyWith(
+                  style: dmSansW200.copyWith(
                     fontSize: 32,
                     color: AppColors.themeColor,
                   ),
@@ -78,7 +78,7 @@ class ProjectsWidget extends StatelessWidget {
                 const Gap(12),
                 Text(
                   HomeController.featuredProject.subtitle,
-                  style: dmSansW400.copyWith(
+                  style: dmSansW200.copyWith(
                     fontSize: 16,
                     color: AppColors.colorF6F6F6.withValues(alpha: .95),
                     height: 1.6,
@@ -102,7 +102,7 @@ class ProjectsWidget extends StatelessWidget {
                       ),
                       child: Text(
                         tech,
-                        style: dmSansW500.copyWith(color: AppColors.themeColor),
+                        style: dmSansW200.copyWith(color: AppColors.themeColor),
                       ),
                     );
                   }).toList(),
@@ -110,7 +110,7 @@ class ProjectsWidget extends StatelessWidget {
                 const Gap(20),
                 Text(
                   HomeController.featuredProject.result,
-                  style: dmSansW400.copyWith(
+                  style: dmSansW200.copyWith(
                     fontSize: 15,
                     color: AppColors.white.withValues(alpha: .9),
                     fontStyle: FontStyle.italic,
@@ -126,11 +126,11 @@ class ProjectsWidget extends StatelessWidget {
                         ),
                         icon: const Icon(
                           Icons.play_circle_fill,
-                          color: Colors.white,
+                          color: AppColors.white,
                         ),
                         label: const Text("Watch Demo"),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: AppColors.colorFF0000,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 22,
                             vertical: 16,
@@ -170,7 +170,7 @@ class ProjectsWidget extends StatelessWidget {
                   crossAxisCount: crossAxisCount,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
-                  childAspectRatio: 1.8,
+                  mainAxisExtent: 260,
                 ),
                 itemBuilder: (context, index) {
                   final project = HomeController.projects[index];
@@ -220,21 +220,21 @@ class ProjectsWidget extends StatelessWidget {
                   children: [
                     Text(
                       "🚀 Featured Project",
-                      style: dmSansW600.copyWith(color: AppColors.themeColor),
+                      style: dmSansW200.copyWith(color: AppColors.themeColor),
                     ),
                     const Gap(12),
                     Text(
                       HomeController.featuredProject.title,
-                      style: dmSansW700.copyWith(
+                      style: dmSansW200.copyWith(
                         fontSize: 30,
-                        color: Colors.white,
+                        color: AppColors.white,
                       ),
                     ),
                     const Gap(12),
                     Text(
                       HomeController.featuredProject.subtitle,
-                      style: dmSansW400.copyWith(
-                        color: Colors.white.withValues(alpha: .9),
+                      style: dmSansW200.copyWith(
+                        color: AppColors.white.withValues(alpha: .9),
                         height: 1.6,
                       ),
                     ),
@@ -256,7 +256,7 @@ class ProjectsWidget extends StatelessWidget {
                           ),
                           child: Text(
                             tech,
-                            style: dmSansW500.copyWith(
+                            style: dmSansW200.copyWith(
                               color: AppColors.themeColor,
                             ),
                           ),
@@ -275,14 +275,14 @@ class ProjectsWidget extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       AppColors.themeColor.withValues(alpha: .4),
-                      Colors.transparent,
+                      AppColors.transparent,
                     ],
                   ),
                 ),
                 child: const Icon(
                   Icons.flutter_dash,
                   size: 80,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             ],
@@ -307,9 +307,7 @@ class ProjectsWidget extends StatelessWidget {
                 crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                // Tablet cards include wrapped tech chips and two action buttons.
-                // Give them enough vertical space instead of clipping their content.
-                childAspectRatio: 1.4,
+                mainAxisExtent: 260,
               ),
               itemBuilder: (context, index) {
                 final project = HomeController.projects[index];
@@ -359,7 +357,7 @@ class ProjectsWidget extends StatelessWidget {
                 ),
                 child: Text(
                   "🚀 Featured Project",
-                  style: dmSansW500.copyWith(
+                  style: dmSansW200.copyWith(
                     color: AppColors.themeColor,
                     fontSize: 12,
                   ),
@@ -368,7 +366,7 @@ class ProjectsWidget extends StatelessWidget {
               const Gap(16),
               Text(
                 HomeController.featuredProject.title,
-                style: dmSansW700.copyWith(
+                style: dmSansW200.copyWith(
                   fontSize: 24,
                   color: AppColors.white,
                 ),
@@ -376,9 +374,9 @@ class ProjectsWidget extends StatelessWidget {
               const Gap(10),
               Text(
                 HomeController.featuredProject.subtitle,
-                style: dmSansW400.copyWith(
+                style: dmSansW200.copyWith(
                   fontSize: 14,
-                  color: Colors.white.withValues(alpha: .9),
+                  color: AppColors.white.withValues(alpha: .9),
                   height: 1.6,
                 ),
               ),
@@ -398,7 +396,7 @@ class ProjectsWidget extends StatelessWidget {
                     ),
                     child: Text(
                       tech,
-                      style: dmSansW500.copyWith(
+                      style: dmSansW200.copyWith(
                         color: AppColors.themeColor,
                         fontSize: 11,
                       ),
@@ -409,8 +407,8 @@ class ProjectsWidget extends StatelessWidget {
               const Gap(18),
               Text(
                 HomeController.featuredProject.result,
-                style: dmSansW400.copyWith(
-                  color: Colors.white.withValues(alpha: .85),
+                style: dmSansW200.copyWith(
+                  color: AppColors.white.withValues(alpha: .85),
                   fontStyle: FontStyle.italic,
                 ),
               ),

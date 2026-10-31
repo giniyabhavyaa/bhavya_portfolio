@@ -18,7 +18,7 @@ class NavigatedButton extends StatelessWidget {
               return ListTile(
                 title: Text(
                   item.title,
-                  style: dmSansW800.copyWith(
+                  style: dmSansW200.copyWith(
                     fontSize: 15,
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -38,7 +38,7 @@ class NavigatedButton extends StatelessWidget {
                 onPressed: () => controller.scrollToSection(item.sectionIndex),
                 child: Text(
                   item.title,
-                  style: dmSansW800.copyWith(
+                  style: dmSansW200.copyWith(
                     fontSize: 15,
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,

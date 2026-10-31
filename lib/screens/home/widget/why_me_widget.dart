@@ -31,7 +31,7 @@ class WhyChooseMeWidget extends StatelessWidget {
       children: [
         Text(
           "Why Choose Me",
-          style: dmSansW800.copyWith(
+          style: dmSansW200.copyWith(
             fontSize: isWide ? 42 : 30,
             color: AppColors.white,
             fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class WhyChooseMeWidget extends StatelessWidget {
           child: Text(
             "I focus on building high-quality Flutter applications with clean architecture, scalable code, and seamless user experiences.",
             textAlign: TextAlign.center,
-            style: dmSansW400.copyWith(
+            style: dmSansW200.copyWith(
               fontSize: 16,
               height: 1.8,
               color: AppColors.white.withValues(alpha: .9),
@@ -70,18 +70,18 @@ class WhyChooseMeWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(28),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.white.withValues(alpha: 0.06),
-                        Colors.white.withValues(alpha: 0.03),
+                        AppColors.white.withValues(alpha: 0.06),
+                        AppColors.white.withValues(alpha: 0.03),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.08),
+                      color: AppColors.white.withValues(alpha: 0.08),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.18),
+                        color: AppColors.black.withValues(alpha: 0.18),
                         blurRadius: 24,
                         spreadRadius: 1,
                       ),
@@ -94,7 +94,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white.withValues(alpha: 0.08),
+                          color: AppColors.white.withValues(alpha: 0.08),
                         ),
                         child: Icon(
                           item.icon,
@@ -111,7 +111,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                           children: [
                             Text(
                               item.title,
-                              style: dmSansW700.copyWith(
+                              style: dmSansW200.copyWith(
                                 fontSize: 20,
                                 color: AppColors.white,
                                 fontWeight: FontWeight.bold,
@@ -120,7 +120,7 @@ class WhyChooseMeWidget extends StatelessWidget {
                             Gap(12),
                             Text(
                               item.description,
-                              style: dmSansW400.copyWith(
+                              style: dmSansW200.copyWith(
                                 fontSize: 15,
                                 color: AppColors.white.withValues(alpha: .9),
                               ),
@@ -154,7 +154,7 @@ class WhyChooseMeWidget extends StatelessWidget {
         children: [
           Text(
             "Why Choose Me",
-            style: dmSansW800.copyWith(fontSize: 38, color: Colors.white),
+            style: dmSansW200.copyWith(fontSize: 38, color: AppColors.white),
           ),
 
           const Gap(16),
@@ -164,8 +164,8 @@ class WhyChooseMeWidget extends StatelessWidget {
             child: Text(
               "I focus on building high-quality Flutter applications with clean architecture, scalable code and seamless user experiences.",
               textAlign: TextAlign.center,
-              style: dmSansW400.copyWith(
-                color: Colors.white.withValues(alpha: .9),
+              style: dmSansW200.copyWith(
+                color: AppColors.white.withValues(alpha: .9),
                 height: 1.7,
               ),
             ),
@@ -190,9 +190,9 @@ class WhyChooseMeWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(22),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
-                  color: Colors.white.withValues(alpha: .04),
+                  color: AppColors.white.withValues(alpha: .04),
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: .08),
+                    color: AppColors.white.withValues(alpha: .08),
                   ),
                 ),
                 child: Row(
@@ -215,8 +215,8 @@ class WhyChooseMeWidget extends StatelessWidget {
                         children: [
                           Text(
                             item.title,
-                            style: dmSansW700.copyWith(
-                              color: Colors.white,
+                            style: dmSansW200.copyWith(
+                              color: AppColors.white,
                               fontSize: 18,
                             ),
                           ),
@@ -226,8 +226,8 @@ class WhyChooseMeWidget extends StatelessWidget {
                               item.description,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 4,
-                              style: dmSansW400.copyWith(
-                                color: Colors.white.withValues(alpha: .9),
+                              style: dmSansW200.copyWith(
+                                color: AppColors.white.withValues(alpha: .9),
                               ),
                             ),
                           ),
@@ -251,7 +251,7 @@ class WhyChooseMeWidget extends StatelessWidget {
         children: [
           Text(
             "Why Choose Me",
-            style: dmSansW800.copyWith(fontSize: 30, color: Colors.white),
+            style: dmSansW200.copyWith(fontSize: 30, color: AppColors.white),
           ),
 
           const Gap(12),
@@ -259,8 +259,8 @@ class WhyChooseMeWidget extends StatelessWidget {
           Text(
             "I focus on building high-quality Flutter applications with clean architecture and scalable code.",
             textAlign: TextAlign.center,
-            style: dmSansW400.copyWith(
-              color: Colors.white.withValues(alpha: .9),
+            style: dmSansW200.copyWith(
+              color: AppColors.white.withValues(alpha: .9),
               height: 1.7,
             ),
           ),
@@ -275,8 +275,10 @@ class WhyChooseMeWidget extends StatelessWidget {
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(22),
-                color: Colors.white.withValues(alpha: .05),
-                border: Border.all(color: Colors.white.withValues(alpha: .08)),
+                color: AppColors.white.withValues(alpha: .05),
+                border: Border.all(
+                  color: AppColors.white.withValues(alpha: .08),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,8 +295,8 @@ class WhyChooseMeWidget extends StatelessWidget {
 
                   Text(
                     item.title,
-                    style: dmSansW700.copyWith(
-                      color: Colors.white,
+                    style: dmSansW200.copyWith(
+                      color: AppColors.white,
                       fontSize: 18,
                     ),
                   ),
@@ -303,8 +305,8 @@ class WhyChooseMeWidget extends StatelessWidget {
 
                   Text(
                     item.description,
-                    style: dmSansW400.copyWith(
-                      color: Colors.white.withValues(alpha: .9),
+                    style: dmSansW200.copyWith(
+                      color: AppColors.white.withValues(alpha: .9),
                       height: 1.6,
                     ),
                   ),

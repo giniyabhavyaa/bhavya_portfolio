@@ -55,7 +55,7 @@ class HeroWidget extends StatelessWidget {
                       colors: [
                         AppColors.themeColor.withValues(alpha: 0.45),
                         AppColors.themeColor.withValues(alpha: 0.15),
-                        Colors.transparent,
+                        AppColors.transparent,
                       ],
                       stops: const [0.4, 0.7, 1],
                     ),
@@ -70,7 +70,7 @@ class HeroWidget extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         AppColors.themeColor.withValues(alpha: 0.6),
-                        Colors.transparent,
+                        AppColors.transparent,
                       ],
                     ),
                   ),
@@ -96,7 +96,7 @@ class HeroWidget extends StatelessWidget {
 
         Text(
               "Flutter Developer Who Builds Scalable Apps 🚀",
-              style: dmSansW800.copyWith(
+              style: dmSansW200.copyWith(
                 fontSize: 36,
                 color: AppColors.white,
                 height: 1.2,
@@ -120,7 +120,7 @@ class HeroWidget extends StatelessWidget {
             return RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                style: dmSansW500.copyWith(
+                style: dmSansW200.copyWith(
                   fontSize: 16,
                   color: AppColors.white.withValues(alpha: 0.9),
                 ),
@@ -128,7 +128,7 @@ class HeroWidget extends StatelessWidget {
                   TextSpan(text: controller.getNormalText(currentText)),
                   TextSpan(
                     text: controller.getHighlightText(currentText),
-                    style: TextStyle(color: AppColors.themeColor),
+                    style: dmSansW200.copyWith(color: AppColors.themeColor),
                   ),
                   TextSpan(text: controller.getRemainingText(currentText)),
                 ],
@@ -150,7 +150,7 @@ class HeroWidget extends StatelessWidget {
               ),
               child: Text(
                 "Available for freelance projects | Fast delivery | Clean code",
-                style: dmSansW500.copyWith(
+                style: dmSansW200.copyWith(
                   fontSize: 13,
                   color: AppColors.themeColor.withValues(alpha: 0.80),
                 ),
@@ -210,7 +210,7 @@ class HeroWidget extends StatelessWidget {
               ),
               child: Text(
                 "View Projects",
-                style: dmSansW300.copyWith(
+                style: dmSansW200.copyWith(
                   fontSize: 14,
                   color: AppColors.white,
                 ),
@@ -233,10 +233,12 @@ class HeroWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
               color: AppColors.black.withValues(alpha: 0.35),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+              border: Border.all(
+                color: AppColors.white.withValues(alpha: 0.08),
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.25),
+                  color: AppColors.black.withValues(alpha: 0.25),
                   blurRadius: 30,
                   offset: const Offset(0, 20),
                 ),
@@ -248,7 +250,7 @@ class HeroWidget extends StatelessWidget {
               children: [
                 Text(
                       "Flutter Developer Who Builds Scalable Apps 🚀",
-                      style: dmSansW800.copyWith(
+                      style: dmSansW200.copyWith(
                         fontSize: 46,
                         color: AppColors.white,
                         height: 1.1,
@@ -270,7 +272,7 @@ class HeroWidget extends StatelessWidget {
                     );
                     return RichText(
                       text: TextSpan(
-                        style: dmSansW500.copyWith(
+                        style: dmSansW200.copyWith(
                           fontSize: 18,
                           color: AppColors.white.withValues(alpha: 0.9),
                         ),
@@ -278,7 +280,9 @@ class HeroWidget extends StatelessWidget {
                           TextSpan(text: controller.getNormalText(currentText)),
                           TextSpan(
                             text: controller.getHighlightText(currentText),
-                            style: TextStyle(color: AppColors.themeColor),
+                            style: dmSansW200.copyWith(
+                              color: AppColors.themeColor,
+                            ),
                           ),
                           TextSpan(
                             text: controller.getRemainingText(currentText),
@@ -305,7 +309,7 @@ class HeroWidget extends StatelessWidget {
                       ),
                       child: Text(
                         "Available for freelance projects | Fast delivery | Clean code",
-                        style: dmSansW500.copyWith(
+                        style: dmSansW200.copyWith(
                           fontSize: 13,
                           color: AppColors.themeColor.withValues(alpha: .80),
                         ),
@@ -364,7 +368,7 @@ class HeroWidget extends StatelessWidget {
                       ),
                       child: Text(
                         "View Projects",
-                        style: dmSansW300.copyWith(
+                        style: dmSansW200.copyWith(
                           fontSize: 14,
                           color: AppColors.white,
                         ),
@@ -421,7 +425,7 @@ class HeroWidget extends StatelessWidget {
                                         AppColors.themeColor.withValues(
                                           alpha: 0.15,
                                         ),
-                                        Colors.transparent,
+                                        AppColors.transparent,
                                       ],
                                       stops: const [0.4, 0.7, 1],
                                     ),
@@ -438,7 +442,7 @@ class HeroWidget extends StatelessWidget {
                                         AppColors.themeColor.withValues(
                                           alpha: 0.6,
                                         ),
-                                        Colors.transparent,
+                                        AppColors.transparent,
                                       ],
                                     ),
                                   ),
@@ -494,7 +498,7 @@ class HeroWidget extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         AppColors.themeColor.withValues(alpha: 0.4),
-                        Colors.transparent,
+                        AppColors.transparent,
                       ],
                     ),
                   ),
@@ -524,12 +528,12 @@ class HeroWidget extends StatelessWidget {
 
         Text(
           "Hi, I'm Bhavya 👋",
-          style: dmSansW800.copyWith(fontSize: 32, color: AppColors.white),
+          style: dmSansW200.copyWith(fontSize: 32, color: AppColors.white),
         ).animate().fadeIn(),
 
         Text(
           "Building beautiful & performant apps with Flutter.",
-          style: dmSansW400.copyWith(
+          style: dmSansW200.copyWith(
             fontSize: 14,
             color: AppColors.color797979,
           ),
@@ -540,7 +544,7 @@ class HeroWidget extends StatelessWidget {
 
         Text(
           "Flutter Developer • GetX • Firebase • API",
-          style: dmSansW500.copyWith(
+          style: dmSansW200.copyWith(
             fontSize: 16,
             color: AppColors.color797979,
           ),

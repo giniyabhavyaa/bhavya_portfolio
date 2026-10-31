@@ -19,13 +19,13 @@ class HireMeButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: _launchEmail,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
+        backgroundColor: AppColors.color1F4B82,
         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
       child: Text(
         "Hire Me",
-        style: dmSansW500.copyWith(fontSize: 18, color: AppColors.white),
+        style: dmSansW200.copyWith(fontSize: 18, color: AppColors.white),
       ),
     ).animate().fadeIn(duration: 600.ms).moveY(begin: 20, duration: 600.ms);
   }

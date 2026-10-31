@@ -15,7 +15,7 @@ class ServiceWidget extends StatelessWidget {
       children: [
         Text(
           "Services",
-          style: dmSansW700.copyWith(fontSize: 28, color: AppColors.white),
+          style: dmSansW200.copyWith(fontSize: 28, color: AppColors.white),
         ),
         Gap(30),
         Wrap(
@@ -60,7 +60,7 @@ class _GlowCard extends StatelessWidget {
           Gap(14),
           Text(
             service.title,
-            style: dmSansW600.copyWith(
+            style: dmSansW200.copyWith(
               fontSize: 20,
               color: AppColors.color1F4B82,
             ),
@@ -68,7 +68,7 @@ class _GlowCard extends StatelessWidget {
           Gap(10),
           Text(
             service.description,
-            style: dmSansW400.copyWith(
+            style: dmSansW200.copyWith(
               color: AppColors.color797979,
               fontSize: 14,
             ),

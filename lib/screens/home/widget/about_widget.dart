@@ -18,9 +18,9 @@ class AboutWidget extends StatelessWidget {
         vertical: isWide ? 36 : 28,
       ),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.05),
+        color: AppColors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.1)),
         boxShadow: [
           BoxShadow(
             color: AppColors.themeColor.withValues(alpha: 0.25),
@@ -35,7 +35,7 @@ class AboutWidget extends StatelessWidget {
         children: [
           Text(
             "About Me",
-            style: dmSansW800.copyWith(
+            style: dmSansW200.copyWith(
               fontSize: isWide ? 32 : 26,
               color: AppColors.white,
             ),
@@ -47,7 +47,7 @@ class AboutWidget extends StatelessWidget {
             "A Flutter Developer who builds modern mobile & web apps with clean architecture, "
             "GetX state management, animations, API integration, Firebase and "
             "pixel-perfect responsive UI.",
-            style: dmSansW400.copyWith(
+            style: dmSansW200.copyWith(
               fontSize: isWide ? 17 : 15,
               color: AppColors.white.withValues(alpha: .92),
               height: 1.6,

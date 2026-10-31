@@ -22,7 +22,7 @@ class ContactWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         gradient: const LinearGradient(
-          colors: [Color(0xFF1A1A2F), Color(0xFF252544)],
+          colors: [AppColors.color1A1A2F, AppColors.color252544],
         ),
         boxShadow: [
           BoxShadow(
@@ -36,29 +36,37 @@ class ContactWidget extends StatelessWidget {
         children: [
           Text(
             "Let's Work Together",
-            style: dmSansW700.copyWith(color: Colors.white, fontSize: 30),
+            style: dmSansW200.copyWith(color: AppColors.white, fontSize: 30),
           ),
           const Gap(10),
           Text(
             "Available for freelance & full-time roles.",
             textAlign: TextAlign.center,
-            style: dmSansW400.copyWith(color: Colors.white70, fontSize: 16),
+            style: dmSansW200.copyWith(
+              color: AppColors.white.withValues(alpha: 0.7),
+              fontSize: 16,
+            ),
           ),
           const Gap(35),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 30),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.06),
+              color: AppColors.white.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(22),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+              border: Border.all(
+                color: AppColors.white.withValues(alpha: 0.08),
+              ),
             ),
             child: Column(
               children: [
                 Text(
                   "Let’s build your next app 🚀",
                   textAlign: TextAlign.center,
-                  style: dmSansW700.copyWith(color: Colors.white, fontSize: 26),
+                  style: dmSansW200.copyWith(
+                    color: AppColors.white,
+                    fontSize: 26,
+                  ),
                 ),
 
                 const Gap(14),
@@ -66,8 +74,8 @@ class ContactWidget extends StatelessWidget {
                 Text(
                   "Need a modern Flutter app or a scalable backend solution? Let’s connect and turn your idea into reality.",
                   textAlign: TextAlign.center,
-                  style: dmSansW400.copyWith(
-                    color: Colors.white70,
+                  style: dmSansW200.copyWith(
+                    color: AppColors.white.withValues(alpha: 0.7),
                     height: 1.6,
                   ),
                 ),
@@ -88,12 +96,12 @@ class ContactWidget extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.send_rounded, color: Colors.white),
+                      Icon(Icons.send_rounded, color: AppColors.white),
                       Gap(10),
                       Text(
                         "Contact Me",
-                        style: dmSansW600.copyWith(
-                          color: Colors.white,
+                        style: dmSansW200.copyWith(
+                          color: AppColors.white,
                           fontSize: 16,
                         ),
                       ),

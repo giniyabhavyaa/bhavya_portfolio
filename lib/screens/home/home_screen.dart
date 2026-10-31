@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.white.withValues(alpha: 0.12),
+                  color: AppColors.white.withValues(alpha: 0.12),
                   blurRadius: 18,
                   spreadRadius: 2,
                 ),
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                 const Gap(10),
                 Text(
                   "Bhavya Giniya",
-                  style: dmSansW800.copyWith(
+                  style: dmSansW200.copyWith(
                     fontSize: 20,
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -104,7 +104,10 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [Color(0xFF0F1122), Color(0xFF05060F)],
+                            colors: [
+                              AppColors.color0F1122,
+                              AppColors.color05060F,
+                            ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                           ),
@@ -164,8 +167,10 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               const ShootingStar(),
-              const Positioned.fill(
-                child: ColoredBox(color: Color(0x80000000)),
+              Positioned.fill(
+                child: ColoredBox(
+                  color: AppColors.black.withValues(alpha: 0.5),
+                ),
               ),
               SingleChildScrollView(
                 controller: controller.scrollController,
@@ -190,7 +195,7 @@ class HomeScreen extends StatelessWidget {
                     Gap(40),
                     Text(
                       "© 2026 • Bhavya Giniya • Flutter Developer",
-                      style: dmSansW400.copyWith(
+                      style: dmSansW200.copyWith(
                         fontSize: 14,
                         color: AppColors.colorBCBCBC,
                       ),

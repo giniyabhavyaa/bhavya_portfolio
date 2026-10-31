@@ -1,4 +1,6 @@
 import 'dart:math';
+
+import 'package:bhavya_portfolio/helpers/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ShootingStar extends StatefulWidget {
@@ -58,11 +60,11 @@ class ShootingPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final headPaint = Paint()..color = Colors.white;
+    final headPaint = Paint()..color = AppColors.white;
 
     final trailPaint = Paint()
       ..shader = const LinearGradient(
-        colors: [Colors.white, Colors.transparent],
+        colors: [AppColors.white, AppColors.transparent],
       ).createShader(Rect.fromLTWH(0, 0, 100, 2));
 
     canvas.drawCircle(const Offset(5, 10), 3, headPaint);
